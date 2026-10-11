@@ -2,10 +2,8 @@
 
 import { useSyncExternalStore } from "react";
 
-export type JournalEntry = {
-  prompt: string;
-  digDeeper: string;
-  finish: string;
+export type WorkEntry = {
+  values: Record<string, string>;
   updatedAt?: string;
 };
 
@@ -14,14 +12,15 @@ export type PracticeResult = { score: number; total: number; at: string };
 export type BinderState = {
   name: string;
   notes: Record<string, string>;
-  journal: Record<string, JournalEntry>;
+  /** binder activity responses, keyed by worksheet id */
+  work: Record<string, WorkEntry>;
   completed: string[];
   practice: Record<string, PracticeResult>;
 };
 
 const KEY = "leading-with-care-binder:v1";
 
-const empty: BinderState = { name: "", notes: {}, journal: {}, completed: [], practice: {} };
+const empty: BinderState = { name: "", notes: {}, work: {}, completed: [], practice: {} };
 
 let state: BinderState = empty;
 let loaded = false;
@@ -98,14 +97,22 @@ export function setNote(key: string, value: string) {
   update((s) => ({ ...s, notes: { ...s.notes, [key]: value } }));
 }
 
-export function setJournal(key: string, field: keyof Omit<JournalEntry, "updatedAt">, value: string) {
+export function setWork(worksheetId: string, fieldId: string, value: string) {
   update((s) => {
-    const prev = s.journal[key] ?? { prompt: "", digDeeper: "", finish: "" };
+    const prev = s.work[worksheetId] ?? { values: {} };
     return {
       ...s,
-      journal: { ...s.journal, [key]: { ...prev, [field]: value, updatedAt: new Date().toISOString() } },
+      work: {
+        ...s.work,
+        [worksheetId]: { values: { ...prev.values, [fieldId]: value }, updatedAt: new Date().toISOString() },
+      },
     };
   });
+}
+
+/** number of fields with any text in a worksheet entry */
+export function filledCount(entry: WorkEntry | undefined) {
+  return entry ? Object.values(entry.values).filter((v) => v.trim()).length : 0;
 }
 
 export function toggleComplete(key: string, done?: boolean) {

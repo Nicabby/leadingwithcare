@@ -54,8 +54,8 @@ export default function NotesView() {
           </p>
           <p className="mt-3 text-lg font-semibold text-slate-900">No notes yet</p>
           <p className="mt-1 text-slate-600">Start taking notes in your lessons and they’ll appear here.</p>
-          <Link href="/sections/orientation" className="mt-4 inline-block font-medium text-eap hover:underline">
-            Go to Orientation →
+          <Link href="/sections/introduction" className="mt-4 inline-block font-medium text-eap hover:underline">
+            Go to Lesson 1 →
           </Link>
         </div>
       ) : (

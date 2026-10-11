@@ -15,12 +15,9 @@ export default function LessonList({ section }: { section: Section }) {
         const meta =
           lesson.kind === "practice"
             ? `Practice · ${lesson.questions?.length ?? 0} questions${result ? ` · Last score ${result.score}/${result.total}` : ""}`
-            : [
-                lesson.reflection ? "Reflection" : null,
-                lesson.resources?.length ? `${lesson.resources.length} resource${lesson.resources.length > 1 ? "s" : ""}` : null,
-              ]
-                .filter(Boolean)
-                .join(" · ");
+            : lesson.worksheets?.length
+              ? lesson.worksheets.map((w) => w.title).join(" · ")
+              : "";
         return (
           <li key={lesson.slug}>
             <Link
@@ -41,6 +38,9 @@ export default function LessonList({ section }: { section: Section }) {
                   <span className="text-lg font-semibold text-slate-900 group-hover:underline">{lesson.title}</span>
                   {lesson.kind === "practice" && (
                     <span className="rounded-full bg-gold/30 px-2 py-0.5 text-xs font-semibold text-navy">Practice</span>
+                  )}
+                  {lesson.kind === "binder" && (
+                    <span className="rounded-full bg-lilac/50 px-2 py-0.5 text-xs font-semibold text-plum">Fill in</span>
                   )}
                 </span>
                 <span className="mt-1 block text-slate-600">{lesson.summary}</span>

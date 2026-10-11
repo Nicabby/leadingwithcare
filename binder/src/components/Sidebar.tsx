@@ -8,9 +8,10 @@ import { sections } from "@/content";
 import { lessonKey, useBinder } from "@/lib/store";
 
 const tools = [
+  { href: "/toolkit", title: "My Toolkit", sub: "Care-Centered Practice Toolkit", color: "#24497b", icon: "🧰" },
+  { href: "/journal", title: "Pause & Check Journal", sub: "Reflections · Export to PDF", color: "#7f4f74", icon: "⏸" },
+  { href: "/live-practice", title: "Live Practice Prep", sub: "Bring to class", color: "#cdb483", icon: "💬" },
   { href: "/your-notes", title: "Your Notes", sub: "All your learning notes", color: "#6b7280", icon: "📝" },
-  { href: "/journal", title: "Reflection Journal", sub: "Reflections · Export to PDF", color: "#7f4f74", icon: "📓" },
-  { href: "/resource-packages", title: "Resource Packages", sub: "Password-protected downloads", color: "#24497b", icon: "📦" },
 ];
 
 function NavContent({ onNavigate }: { onNavigate?: () => void }) {
@@ -32,7 +33,7 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
         <div className="flex items-center justify-between text-xs font-medium text-slate-600">
           <span>Your progress</span>
           <span>
-            {completed.length}/{total} lessons
+            {completed.length}/{total} pages
           </span>
         </div>
         <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-200">
@@ -40,8 +41,8 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
         </div>
       </div>
 
-      <h2 className="mt-6 mb-4 text-center text-lg font-bold text-gray-800">Training Sections</h2>
-      <nav aria-label="Training sections" className="space-y-2">
+      <h2 className="mt-6 mb-4 text-center text-lg font-bold text-gray-800">Course Lessons</h2>
+      <nav aria-label="Course lessons" className="space-y-2">
         {sections.map((s) => {
           const active = pathname === `/sections/${s.id}` || pathname.startsWith(`/sections/${s.id}/`);
           const done = s.lessons.filter((l) => completed.includes(lessonKey(s.id, l.slug))).length;
@@ -62,9 +63,7 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
             >
               <div className="text-sm leading-tight">{s.shortTitle}</div>
               <div className="mt-1 flex justify-between text-xs opacity-80">
-                <span>
-                  {s.lessons.length} lessons
-                </span>
+                <span>{s.eyebrow}</span>
                 {done > 0 && <span>{done === s.lessons.length ? "✓ Complete" : `${done} done`}</span>}
               </div>
             </Link>
@@ -125,7 +124,7 @@ export default function Sidebar() {
           aria-expanded={open}
           aria-controls="mobile-nav"
         >
-          ☰ Sections
+          ☰ Lessons
         </button>
       </div>
 

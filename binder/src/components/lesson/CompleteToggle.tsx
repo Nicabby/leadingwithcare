@@ -13,7 +13,7 @@ export default function CompleteToggle({ storageKey }: { storageKey: string }) {
         onChange={(e) => toggleComplete(storageKey, e.target.checked)}
         className="h-5 w-5 accent-navy"
       />
-      <span className="font-medium text-slate-800">{done ? "Lesson complete ✓" : "Mark lesson as complete"}</span>
+      <span className="font-medium text-slate-800">{done ? "Page complete ✓" : "Mark this page as complete"}</span>
     </label>
   );
 }

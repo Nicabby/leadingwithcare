@@ -1,7 +1,7 @@
 "use client";
 
 import type { jsPDF as JsPDF } from "jspdf";
-import { reflections, sections } from "@/content";
+import { sections, worksheetSteps, type WorksheetRef } from "@/content";
 import type { BinderState } from "./store";
 import { lessonKey } from "./store";
 
@@ -138,44 +138,47 @@ function fileSafe(name: string) {
   return name.trim().replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "");
 }
 
-export async function exportJournalPdf(state: BinderState, includeBlank: boolean) {
+export type WorksheetExport = {
+  title: string;
+  subtitle: string;
+  intro: string;
+  file: string;
+  items: WorksheetRef[];
+  includeBlank: boolean;
+};
+
+/** Export any set of binder activities (toolkit, Pause & Check, live practice, or the whole binder). */
+export async function exportWorksheetsPdf(state: BinderState, opts: WorksheetExport) {
   const doc = await newDoc();
   const w = new Writer(doc);
-  w.header("Reflection Journal", "Reflections  |  Leading with Care", state.name);
-  w.text(
-    "This journal holds your reflections from the Leading with Care course. There are no right or wrong answers - it is a space for honest reflection and personal insight.",
-    { size: 10.5, color: SLATE, gap: 12 },
-  );
+  w.header(opts.title, opts.subtitle, state.name);
+  w.text(opts.intro, { size: 10.5, color: SLATE, gap: 12 });
 
   let written = 0;
   for (const section of sections) {
-    const items = reflections.filter((r) => r.section.id === section.id);
-    const visible = items.filter(({ lesson }) => {
-      const e = state.journal[lessonKey(section.id, lesson.slug)];
-      return includeBlank || (e && (e.prompt || e.digDeeper || e.finish));
+    const items = opts.items.filter((r) => r.section.id === section.id);
+    const visible = items.filter(({ worksheet }) => {
+      const e = state.work[worksheet.id];
+      return opts.includeBlank || (e && Object.values(e.values).some((v) => v.trim()));
     });
     if (!visible.length) continue;
     w.sectionBar(section.title, section.color);
-    for (const { lesson } of visible) {
-      const r = lesson.reflection!;
-      const e = state.journal[lessonKey(section.id, lesson.slug)];
+    for (const { worksheet } of visible) {
+      const values = state.work[worksheet.id]?.values ?? {};
       w.ensure(90);
-      w.text(lesson.title, { size: 13, bold: true, color: INK, gap: 6 });
-      const parts: [string, string, string | undefined][] = [
-        ["PROMPT", r.prompt, e?.prompt],
-        ["DIG DEEPER", r.digDeeper, e?.digDeeper],
-        ["FINISH THIS SENTENCE", r.finish, e?.finish],
-      ];
-      for (const [label, q, a] of parts) {
-        w.ensure(includeBlank && !(a && a.trim()) ? (label === "FINISH THIS SENTENCE" ? 90 : 135) : 60);
-        w.text(label, { size: 8.5, bold: true, color: PLUM, gap: 1 });
-        w.text(q, { size: 10.5, bold: true, color: NAVY, gap: 3 });
-        if (a && a.trim()) {
-          w.text(a.trim(), { size: 11, color: INK, gap: 10, indent: 10 });
-        } else if (includeBlank) {
-          w.writingLines(label === "FINISH THIS SENTENCE" ? 2 : 4);
-        } else {
-          w.text("(no response yet)", { size: 10, italic: true, color: SLATE, gap: 10, indent: 10 });
+      w.text(worksheet.title, { size: 13, bold: true, color: INK, gap: 6 });
+      for (const group of worksheetSteps(worksheet)) {
+        const answered = group.fields.filter((f) => (values[f.id] ?? "").trim());
+        if (!opts.includeBlank && !answered.length) continue;
+        w.ensure(70);
+        if (group.heading) w.text(group.heading.toUpperCase(), { size: 8.5, bold: true, color: PLUM, gap: 3 });
+        for (const f of group.fields) {
+          const a = (values[f.id] ?? "").trim();
+          if (!a && !opts.includeBlank) continue;
+          w.ensure(a ? 50 : 100);
+          w.text(f.label, { size: 10.5, bold: true, color: NAVY, gap: 3 });
+          if (a) w.text(a, { size: 11, color: INK, gap: 9, indent: 10 });
+          else w.writingLines((f.rows ?? 3) >= 3 ? 3 : 2);
         }
       }
       w.rule();
@@ -183,13 +186,13 @@ export async function exportJournalPdf(state: BinderState, includeBlank: boolean
     }
   }
   if (!written) {
-    w.text("No reflections yet. Complete the Reflections in your lessons, or export with blank prompts included.", {
+    w.text("Nothing here yet. Complete the activities in your lessons, or export with blank prompts included.", {
       size: 11,
       color: SLATE,
     });
   }
-  w.footer("Leading with Care  |  Reflection Journal");
-  doc.save(`Leading-with-Care-Journal${state.name ? `-${fileSafe(state.name)}` : ""}.pdf`);
+  w.footer(`Leading with Care  |  ${opts.title}`);
+  doc.save(`Leading-with-Care-${opts.file}${state.name ? `-${fileSafe(state.name)}` : ""}.pdf`);
 }
 
 export async function exportNotesPdf(state: BinderState) {

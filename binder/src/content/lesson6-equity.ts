@@ -1,0 +1,328 @@
+import type { Section } from "./types";
+
+export const lesson6: Section = {
+  id: "equity-access",
+  title: "Equity vs. Equality: Supporting Access and Participation",
+  shortTitle: "6. Equity vs. Equality",
+  eyebrow: "Lesson 6 of 9",
+  description: "Keeping the standard while questioning the method, locating barriers, and making alternatives count.",
+  color: "#b1b4e5",
+  ink: "#24497b",
+  tint: "#f1f2fb",
+  overview: [
+    "Fairness can be surprisingly difficult to recognize. Giving everyone the same thing can feel fair because the rule is consistent. But people do not always encounter that rule under the same conditions.",
+    "In this lesson, you distinguish equality, equity, access, inclusion, and belonging; identify where participation becomes harder than it needs to be; and use the Equity and Access Decision Guide to decide what should stay consistent, what can change, and how to tell whether an adjustment actually improved access.",
+  ],
+  keyConcept: "Equity is not about making the standard easier. It is about making the standard genuinely reachable.",
+  objectives: [
+    "Differentiate equality, equity, access, inclusion, and belonging in practical situations.",
+    "Identify conditions that create unnecessary barriers to participation.",
+    "Recognize when participation and influence are uneven within a group.",
+    "Distinguish what must remain consistent from what can be adjusted.",
+    "Use the Equity and Access Decision Guide to make and evaluate equitable decisions.",
+  ],
+  lessons: [
+    {
+      slug: "review",
+      title: "Lesson Review",
+      subtitle: "Keep the standard. Question the method.",
+      kind: "lesson",
+      summary: "Five related ideas, separating the standard from the method, locating barriers, and running an inclusion scan.",
+      overview: [
+        "Equality and equity are not opposites. Sometimes treating people the same is fair—a safety rule, a learning objective, or a group agreement about respectful conduct may not change from person to person. Equality asks what everyone should receive, understand, or be accountable for. Equity asks whether current conditions make that shared expectation harder for some people to meet—and what can reasonably change without changing the purpose.",
+      ],
+      keyIdeasTitle: "Five Parts of the Experience",
+      keyIdeas: [
+        { title: "Equality — What should stay consistent?", text: "Providing the same resource, direction, opportunity, or rule to everyone. Sometimes consistency is exactly what the situation requires.", tip: "Everyone in a planning group must submit one recommendation by Friday." },
+        { title: "Equity — What barrier needs to be reduced?", text: "Identifying and reducing barriers so people receive the support needed to access an opportunity. It asks, “What is getting in the way of a fair opportunity?”", tip: "The Friday deadline remains, but participants can submit verbally, in writing, or through an accessible format." },
+        { title: "Access — Can people actually use the opportunity?", text: "Having a practical ability to participate, understand expectations, use resources, and contribute meaningfully.", tip: "An online form is available to everyone, but it isn’t compatible with a participant’s assistive technology. The opportunity exists; access does not." },
+        { title: "Inclusion — Do their contributions matter?", text: "Being welcomed, considered, and able to participate as part of the group—ideas heard, considered, connected to the work, and able to influence what happens next.", tip: "Written feedback is accepted, but only comments made aloud shape the decision. Inclusion is still incomplete." },
+        { title: "Belonging — Do people experience that their presence matters?", text: "Feeling accepted, valued, and able to be yourself without hiding important parts of your identity. Leaders cannot guarantee belonging; they can create conditions that make it more possible." },
+      ],
+      comparison: {
+        title: "Separate the Standard from the Method",
+        left: "Shared standard",
+        right: "Method that may be flexible",
+        rows: [
+          ["Contribute one idea", "Speak aloud"],
+          ["Demonstrate understanding", "Complete one specific response format"],
+          ["Meet a deadline", "Attend one particular meeting"],
+          ["Practice a skill", "Perform it publicly in front of the full group"],
+          ["Follow a safety expectation", "Receive the information in only one format"],
+        ],
+      },
+      tools: [
+        {
+          title: "Identify the Barrier Before Choosing Support",
+          intro: "Shift the question from “What is wrong with this person’s participation?” to “Where is participation getting stuck?”",
+          steps: [
+            { label: "Pace and processing", text: "Some activities reward fast responders. Advance questions, written instructions, examples, quiet thinking time, repetition, or a pause before discussion can help. Fast response is not the same as strong understanding." },
+            { label: "Communication and formats", text: "Language, disability, neurodiversity, communication technology, public-speaking confidence, or format familiarity can affect participation. Is the communication format essential—or simply familiar?" },
+            { label: "Trust and power", text: "Participation feels risky after dismissal, public correction, power differences, confidentiality concerns, or contributions that had little effect. Do people have reason to believe their participation will be treated fairly?" },
+            { label: "Time, place, and resources", text: "Scheduling, transportation, childcare, cost, technology, physical access, sensory conditions, or materials can turn an available opportunity into an unusable one." },
+            { label: "Available capacity", text: "Stress, conflict, overload, grief, anxiety, or competing demands affect capacity in the moment. The question is not “How do we remove all discomfort?” but “Is there an unnecessary condition we can change without removing the expectation?”" },
+          ],
+        },
+        {
+          title: "Inclusion Scan: Four Lenses",
+          intro: "A quick check during the work of whether people have similar opportunities to join, be heard, and shape what happens next. It is not a participation scorecard and does not require everyone to contribute equally.",
+          steps: [
+            { label: "Voice — Who has a way to contribute?", text: "Notice who speaks, writes, asks questions, contributes after reflection, and who appears to have no workable opening." },
+            { label: "Space — Who gets room to finish and develop an idea?", text: "Notice interruption, turn-taking, pace, who repeatedly opens or closes discussion, and whether some people compete harder for airtime." },
+            { label: "Uptake — What happens after someone contributes?", text: "Notice whose ideas are explored, ignored, challenged, credited, repeated by someone else, or quickly moved past." },
+            { label: "Influence — Whose contributions shape the outcome?", text: "Notice whose suggestions affect the decision, which channels carry most weight, whether written contributions are taken as seriously as spoken ones, and whose needs define the default." },
+          ],
+        },
+        {
+          title: "Design Flexibility Around Purpose",
+          intro: "Define what must remain consistent, then vary what can change. This prevents flexibility from becoming vague or arbitrary.",
+          steps: [
+            { label: "Keep the purpose", text: "Define the essential outcome, such as making a decision, demonstrating understanding, or practicing a skill." },
+            { label: "Vary the route", text: "Provide diverse formats to achieve the purpose, like speaking, writing, drawing, or collaborating in pairs." },
+            { label: "Add support", text: "Incorporate examples, accessible materials, processing time, and clear steps." },
+            { label: "Preserve boundaries", text: "Clarify deadlines, decision rights, respectful conduct expectations, and confidentiality limits." },
+            { label: "Review impact", text: "Evaluate whether options enhance access and whether all routes are equally credible and influential." },
+          ],
+        },
+      ],
+      takeaways: [
+        "Equal treatment is not always equitable access. Check whether the shared approach gives people a real opportunity to meet the shared purpose.",
+        "Uneven participation is a clue, not a conclusion—look at the structure before focusing on the quiet participants.",
+        "Adjust the shared structure when the group’s organization limits participation for several people; add or change an access route when the purpose stays the same but the format makes participation difficult.",
+        "Equity is tested by what the adjustment makes possible—not by how fair the intention sounded.",
+      ],
+      next: "In Inquiry, Curiosity, and Navigating Lived Truth, the focus shifts from participation structure to what happens when people experience the same interaction differently. You will practice listening for facts, meaning, impact, and need—without assuming that one person’s experience automatically tells the whole story.",
+      sourceNote:
+        "This lesson aligns with the National Equity Project’s definition of educational equity as each child receiving what they need to develop to their full academic and social potential; IDRA’s equity goals concerning access, inclusion, treatment, opportunity, resources, and support; and CASEL’s equity connections to social and emotional learning.",
+    },
+    {
+      slug: "binder",
+      title: "Binder Activities",
+      subtitle: "Equity and Access Decision Guide · When “Same” Feels Fairest",
+      kind: "binder",
+      summary: "Build the Equity and Access Decision Guide, reflect on when “same” feels fairest, and bring an access challenge to class.",
+      overview: [
+        "Choose one real or realistic activity, deadline, resource, discussion, meeting, requirement, or decision where the expectation may be reasonable, but current conditions don’t give everyone a workable opportunity to meet it.",
+      ],
+      worksheets: [
+        {
+          id: "l6-equity-access-guide",
+          kind: "toolkit",
+          title: "Equity and Access Decision Guide",
+          intro: [
+            "Equity decisions can become confusing when leaders begin with the solution—more time? a different format? an exception? This guide starts somewhere else. It helps you determine what must remain fair and consistent, where access is breaking down, and what adjustment would actually address that gap.",
+            "Use it when a rule, activity, resource, deadline, or participation structure seems equally available—but not equally usable.",
+          ],
+          situation: { id: "situation", label: "The activity, requirement, or decision I’m examining:", rows: 2 },
+          steps: [
+            { label: "Step 1", title: "Clarify What Must Stay", text: "What is the actual purpose, standard, deadline, safety requirement, or outcome? Be specific.", ask: ["What truly needs to be the same?"], fields: [{ id: "stay", label: "What must stay consistent:", rows: 2 }] },
+            {
+              label: "Step 2",
+              title: "Locate the Access Gap",
+              text: "Where is the current design becoming difficult to use? Consider pace, communication, timing, technology, environment, resources, trust, or another condition.",
+              ask: ["What is preventing a fair opportunity to meet the expectation?"],
+              fields: [{ id: "gap", label: "Where the access gap is:", rows: 2 }],
+            },
+            { label: "Step 3", title: "Decide What Can Change", text: "Separate the requirement from the method.", ask: ["What part of the current design is flexible because it is not essential to the outcome?"], fields: [{ id: "change", label: "What can change:", rows: 2 }] },
+            { label: "Step 4", title: "Match Support to the Gap", text: "Choose an adjustment that actually addresses the issue. Avoid adding support simply because it sounds inclusive.", ask: ["Does this change solve the access problem I identified?"], fields: [{ id: "support", label: "The support that fits the gap:", rows: 2 }] },
+            {
+              label: "Step 5",
+              title: "Make the Alternative Count",
+              text: "Check whether the adjusted method gives the person a legitimate opportunity to participate and influence the result. This is where the framework becomes specifically about equity.",
+              ask: ["Will this contribution be treated as equally credible and meaningful?"],
+              fields: [{ id: "count", label: "How I’ll make sure it carries equal weight:", rows: 2 }],
+            },
+            {
+              label: "Step 6",
+              title: "Review the Outcome",
+              text: "After the change, look at what happened.",
+              ask: ["Did access improve?", "Was the shared standard maintained?", "Did the alternative carry equal weight?", "Is another adjustment needed?"],
+              fields: [{ id: "review", label: "How I’ll know whether it worked:", rows: 2 }],
+            },
+          ],
+          complete: {
+            title: "Complete the Adjustment",
+            fields: [
+              { id: "a1", label: "The shared standard is __________." },
+              { id: "a2", label: "The access gap is __________." },
+              { id: "a3", label: "I can change __________ without changing the purpose." },
+              { id: "a4", label: "I will support access by __________." },
+              { id: "a5", label: "I will make sure this contribution counts by __________." },
+              { id: "a6", label: "I will know the adjustment helped when __________." },
+            ],
+          },
+          useWhen: [
+            "setting a requirement or deadline;",
+            "deciding whether a participation method is essential;",
+            "responding to an access request;",
+            "reviewing uneven participation;",
+            "deciding whether an alternative format is fair;",
+            "checking whether a support actually addresses the barrier; or",
+            "making sure different forms of participation carry meaningful influence.",
+          ],
+          closing:
+            "Use it when you find yourself asking, “Would changing this be unfair?” The guide helps you replace that question with: “What needs to remain consistent—and what can change so the expectation is genuinely accessible?”",
+        },
+        {
+          id: "l6-same-feels-fairest",
+          kind: "pause",
+          title: "When “Same” Feels Fairest",
+          intro: ["Think about a situation where giving everyone the same rule, format, time, or opportunity initially felt fairest."],
+          steps: [
+            {
+              label: "Step 1",
+              title: "Notice",
+              ask: ["What was being offered or required?", "What made treating everyone the same feel fair or important to you?", "What concern comes up when you imagine adjusting the approach for someone?"],
+              listTitle: "For example:",
+              list: ["“Other people will think it is unfair.”", "“Everyone should follow the same rule.”", "“If I change it once, I’ll have to change it for everyone.”", "“Different support means lowering the expectation.”"],
+              fields: [{ id: "notice", label: "What I noticed:" }],
+            },
+            {
+              label: "Step 2",
+              title: "Name",
+              ask: [
+                "What belief about fairness is underneath that reaction?",
+                "Are you treating consistency of method as the same thing as consistency of expectation?",
+                "What do you believe everyone should receive equally?",
+              ],
+              fields: [{ id: "name", label: "The belief about fairness underneath:" }],
+            },
+            {
+              label: "Step 3",
+              title: "Check",
+              ask: [
+                "What is the actual purpose or standard?",
+                "Is the current method essential to meeting it?",
+                "Could the same rule or format create a predictable access gap for someone?",
+                "Would an adjustment change the expectation—or only the conditions for meeting it?",
+                "Am I protecting fairness, or am I protecting familiarity?",
+              ],
+              fields: [{ id: "check", label: "What I find when I check:" }],
+            },
+            {
+              label: "Step 4",
+              title: "Choose",
+              ask: [
+                "What could remain consistent?",
+                "What could reasonably change?",
+                "What support would address the access gap without removing responsibility or lowering the purpose?",
+                "How will you ensure that the adjusted form of participation is treated as equally legitimate?",
+              ],
+              fields: [{ id: "choose", label: "What I would keep and what I would adjust:" }],
+            },
+          ],
+          complete: {
+            title: "Complete the Reflection",
+            fields: [
+              { id: "f1", label: "Fair does not always mean __________." },
+              { id: "f2", label: "What needs to remain consistent is __________." },
+              { id: "f3", label: "What I may be able to adjust is __________ so that __________." },
+            ],
+          },
+          commit: {
+            title: "My Equity Commitment",
+            fields: [{ id: "commit", label: "When I hear myself thinking “but everyone has the same __________,” I will pause and ask __________." }],
+          },
+        },
+        {
+          id: "l6-live",
+          kind: "live",
+          title: "Bring to Next Class: An Access Challenge",
+          intro: [
+            "Bring one de-identified requirement, activity, deadline, participation structure, or access challenge you want to examine. You do not need to share another person’s private information or explain why someone needed support.",
+            "During class, you can test whether the proposed adjustment addresses the actual barrier, maintains the purpose, protects dignity, and creates a genuinely fair opportunity to participate.",
+          ],
+          steps: [
+            {
+              fields: [
+                { id: "expectation", label: "The shared expectation:", rows: 2 },
+                { id: "gap", label: "The access gap I identified:", rows: 2 },
+                { id: "change", label: "What I think could change:", rows: 2 },
+                { id: "consistent", label: "What should remain consistent:", rows: 2 },
+                { id: "weight", label: "How I would make sure the alternative carries meaningful weight:", rows: 2 },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      slug: "knowledge-check",
+      title: "Knowledge Check Practice",
+      subtitle: "Equity, access, and influence",
+      kind: "practice",
+      summary: "Five practice questions on equity vs. equality, barriers, and making alternatives count.",
+      overview: ["Check your understanding of shared standards, flexible methods, and where barriers sit."],
+      questions: [
+        {
+          id: "l6-q1",
+          type: "single",
+          prompt: "A youth advisory group needs feedback from every member by Friday. Everyone has the same deadline and questions. Members may respond during the meeting, through an accessible online form, or in a scheduled conversation. Which statement best describes the design?",
+          options: [
+            "Everyone should respond the same way because fairness requires identical treatment.",
+            "The shared deadline reflects equality, while the different response methods support equity and access.",
+            "The design guarantees inclusion and belonging because everyone was invited.",
+            "Equity would require giving each participant a different deadline.",
+          ],
+          correct: [1],
+          explanation: "The standard (deadline and questions) stays the same; the routes to meeting it vary. An invitation alone cannot guarantee inclusion or belonging.",
+        },
+        {
+          id: "l6-q2",
+          type: "match",
+          prompt: "Where is the barrier? Sort each example into the most useful type of adjustment.",
+          pairs: [
+            { item: "One person repeatedly speaks over others.", answer: "Adjust the shared structure" },
+            { item: "Some participants’ ideas are regularly skipped over or not taken up by the group.", answer: "Adjust the shared structure" },
+            { item: "The same two people answer first and shape every conversation.", answer: "Adjust the shared structure" },
+            { item: "Several people need more time to think before responding.", answer: "Add or change an access route" },
+            { item: "A participant can’t reliably use the digital platform being used.", answer: "Add or change an access route" },
+            { item: "The activity requires public personal sharing, but someone wants to keep it private.", answer: "Add or change an access route" },
+          ],
+          choices: ["Adjust the shared structure", "Add or change an access route"],
+          explanation:
+            "Adjust the shared structure when the group’s organization limits participation for multiple people or gives some voices more space. Add or change an access route when the purpose stays the same but the current format makes participation difficult or impossible.",
+        },
+        {
+          id: "l6-q3",
+          type: "single",
+          prompt: "During a youth planning session, one participant is interrupted twice. Later, another participant repeats a similar idea, and the group immediately begins discussing it. What is the Guide’s strongest response?",
+          options: [
+            "Tell the first participant they need to speak more assertively.",
+            "Wait to see whether the same thing happens again in another session.",
+            "Return credit to the original contributor, invite the participant to finish, and use a clearer turn-taking structure for the discussion.",
+            "Stop the activity and ask the group who they believe was being unfair.",
+          ],
+          correct: [2],
+          explanation: "This addresses space (interruption) and uptake (credit) directly and adjusts the shared structure, rather than placing the burden on the participant.",
+        },
+        {
+          id: "l6-q4",
+          type: "single",
+          prompt: "A supervisor needs every team member to identify one project risk before a decision is finalized. Which design best supports equity while preserving the expectation?",
+          options: [
+            "Require each person to state a risk without preparation during a rapid round.",
+            "Invite comments from anyone who feels comfortable and assume silence means agreement.",
+            "Ask selected employees privately because they usually offer the strongest analysis.",
+            "Share the question in advance and accept one risk verbally, in writing, or through an accessible channel by the decision deadline.",
+          ],
+          correct: [3],
+          explanation: "The expectation (everyone identifies one risk by the deadline) stays the same, while preparation time and multiple routes remove unnecessary barriers.",
+        },
+        {
+          id: "l6-q5",
+          type: "single",
+          prompt: "A community meeting is moved online because of weather. Several members have unreliable internet, and a vote must occur that evening under the group’s rules. What is the most equitable response?",
+          options: [
+            "Keep the video meeting as the only option because changing the format would be unfair to those already online.",
+            "Cancel the vote without checking the rules or available alternatives.",
+            "Confirm allowable voting methods, offer an accessible phone or equivalent alternative, communicate the deadline clearly, and count each route equally.",
+            "Ask members with weak internet to give their vote to another attendee.",
+          ],
+          correct: [2],
+          explanation: "This keeps the shared standard (the rules and deadline), locates the access gap (internet), matches support to it, and makes the alternative count equally.",
+        },
+      ],
+    },
+  ],
+};

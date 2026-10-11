@@ -13,9 +13,9 @@ export default function ContinueCard() {
   if (!next) {
     return (
       <div className="mt-6 rounded-xl border border-lilac bg-[#f8f1fa] p-4 text-navy">
-        <p className="font-semibold">🎉 You’ve completed every lesson in this binder.</p>
+        <p className="font-semibold">🎉 You’ve completed every page in this binder.</p>
         <p className="mt-1 text-sm">
-          Revisit your <Link className="underline" href="/journal">Reflection Journal</Link> and export it as a PDF to keep.
+          Revisit <Link className="underline" href="/toolkit">My Toolkit</Link> and export it as a PDF to keep.
         </p>
       </div>
     );

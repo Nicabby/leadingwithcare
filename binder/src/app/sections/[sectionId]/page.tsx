@@ -32,7 +32,7 @@ export default async function SectionPage({ params }: Props) {
       <p className="mt-2 text-lg text-slate-600">{section.description}</p>
 
       <div className="mt-8 rounded-xl border border-slate-200 p-5 sm:p-6" style={{ backgroundColor: section.tint }}>
-        <h2 className="text-lg font-semibold text-slate-900">Module Overview</h2>
+        <h2 className="text-lg font-semibold text-slate-900">Lesson Overview</h2>
         {section.overview.map((p, i) => (
           <p key={i} className="mt-3 leading-relaxed text-slate-700">
             {p}
@@ -41,7 +41,7 @@ export default async function SectionPage({ params }: Props) {
         {section.keyConcept && <Quote color={section.color}>{section.keyConcept}</Quote>}
 
         <h3 className="mt-6 font-semibold text-slate-900">Learning Objectives</h3>
-        <p className="mt-1 text-sm text-slate-600">By the end of this module, you will be able to:</p>
+        <p className="mt-1 text-sm text-slate-600">By the end of this lesson, you will be able to:</p>
         <ul className="mt-3 space-y-2">
           {section.objectives.map((o, i) => (
             <li key={i} className="flex gap-3 text-slate-700">
@@ -54,7 +54,7 @@ export default async function SectionPage({ params }: Props) {
 
       <Divider />
 
-      <h2 className="mb-4 text-xl font-semibold">Lessons</h2>
+      <h2 className="mb-4 text-xl font-semibold">In This Lesson</h2>
       <LessonList section={section} />
 
       <Divider />
@@ -63,7 +63,7 @@ export default async function SectionPage({ params }: Props) {
         <ButtonLink href="/" variant="outline">
           ← Back to Home
         </ButtonLink>
-        {first && <ButtonLink href={lessonHref(section.id, first.slug)}>Start First Lesson →</ButtonLink>}
+        {first && <ButtonLink href={lessonHref(section.id, first.slug)}>Start →</ButtonLink>}
       </div>
     </Card>
   );

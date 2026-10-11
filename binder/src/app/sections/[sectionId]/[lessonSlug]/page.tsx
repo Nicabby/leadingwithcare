@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { allLessons, getLesson, getNeighbours, getResource, lessonHref } from "@/content";
+import { allLessons, getLesson, getNeighbours, lessonHref } from "@/content";
 import type { Scenario, Section } from "@/content";
 import { ButtonLink, Card, Divider, Quote } from "@/components/ui";
-import ReflectionBox from "@/components/lesson/ReflectionBox";
+import WorksheetCard from "@/components/lesson/WorksheetCard";
+import { kindStyle } from "@/components/lesson/kindStyle";
 import NotesBox from "@/components/lesson/NotesBox";
 import CompleteToggle from "@/components/lesson/CompleteToggle";
 import Practice from "@/components/lesson/Practice";
@@ -30,7 +31,7 @@ function ScenarioBlock({ scenario, section }: { scenario: Scenario; section: Sec
   const cols = scenario.options.length >= 3 ? "lg:grid-cols-3" : "md:grid-cols-2";
   return (
     <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 sm:p-6">
-      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Scenario Example</p>
+      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Scenario</p>
       <h3 className="mt-1 text-lg font-semibold text-slate-900">{scenario.title}</h3>
       <p className="mt-2 text-slate-700">{scenario.description}</p>
       <div className={`mt-5 grid gap-4 ${cols}`}>
@@ -83,7 +84,6 @@ export default async function LessonPage({ params }: Props) {
   const { prev, next } = getNeighbours(section.id, lesson.slug);
   const key = `${section.id}/${lesson.slug}`;
   const color = accent(section);
-  const lessonResources = (lesson.resources ?? []).map(getResource).filter(Boolean);
 
   return (
     <Card>
@@ -102,7 +102,9 @@ export default async function LessonPage({ params }: Props) {
 
       {/* Introduction */}
       <div className="mt-8 rounded-xl border border-slate-200 p-5 sm:p-6" style={{ backgroundColor: section.tint }}>
-        <h2 className="font-semibold text-slate-900">{lesson.kind === "practice" ? "About This Practice" : "Lesson Introduction"}</h2>
+        <h2 className="font-semibold text-slate-900">
+          {lesson.kind === "practice" ? "About This Practice" : lesson.kind === "binder" ? "About These Activities" : "Lesson Introduction"}
+        </h2>
         {lesson.overview.map((p, i) => (
           <p key={i} className="mt-3 leading-relaxed text-slate-700">
             {p}
@@ -140,24 +142,6 @@ export default async function LessonPage({ params }: Props) {
         </>
       )}
 
-      {lesson.checklists?.map((c, i) => (
-        <div key={i}>
-          <Divider />
-          <h2 className="mb-2 text-xl font-semibold text-slate-900">{c.title}</h2>
-          {c.intro && <p className="mb-3 text-slate-600">{c.intro}</p>}
-          <ul className="grid gap-2 sm:grid-cols-2">
-            {c.items.map((item, ii) => (
-              <li key={ii} className="flex gap-3 rounded-lg bg-slate-50 p-3 text-slate-800">
-                <span aria-hidden="true" style={{ color }}>
-                  ✔
-                </span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-
       {lesson.keyIdeas && (
         <>
           <Divider />
@@ -167,9 +151,21 @@ export default async function LessonPage({ params }: Props) {
               <div key={i} className="rounded-r-lg border-l-4 bg-white py-3 pl-4 pr-4 shadow-sm ring-1 ring-slate-100" style={{ borderLeftColor: "#467edd" }}>
                 <h3 className="font-semibold text-slate-900">{k.title}</h3>
                 <p className="mt-1 text-slate-700">{k.text}</p>
+                {k.points && (
+                  <ul className="mt-2 space-y-1">
+                    {k.points.map((pt, pi) => (
+                      <li key={pi} className="flex gap-2 text-slate-700">
+                        <span aria-hidden="true" style={{ color }}>
+                          •
+                        </span>
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 {k.tip && (
                   <p className="mt-2 text-sm text-slate-600">
-                    <span className="font-semibold text-navy">Tip: </span>
+                    <span className="font-semibold text-navy">In practice: </span>
                     {k.tip}
                   </p>
                 )}
@@ -183,7 +179,7 @@ export default async function LessonPage({ params }: Props) {
         <div key={i}>
           <Divider />
           <div className="rounded-2xl border-2 p-5 sm:p-6" style={{ borderColor: section.color }}>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Leadership Tool</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Framework</p>
             <h2 className="mt-1 text-xl font-semibold text-slate-900">{t.title}</h2>
             {t.intro && <p className="mt-2 text-slate-700">{t.intro}</p>}
             <ol className="mt-4 space-y-3">
@@ -242,10 +238,44 @@ export default async function LessonPage({ params }: Props) {
         </div>
       ))}
 
-      {lesson.reflection && (
-        <>
+      {lesson.checklists?.map((c, i) => (
+        <div key={i}>
           <Divider />
-          <ReflectionBox reflection={lesson.reflection} storageKey={key} />
+          <h2 className="mb-2 text-xl font-semibold text-slate-900">{c.title}</h2>
+          {c.intro && <p className="mb-3 text-slate-600">{c.intro}</p>}
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {c.items.map((item, ii) => (
+              <li key={ii} className="flex gap-3 rounded-lg bg-slate-50 p-3 text-slate-800">
+                <span aria-hidden="true" style={{ color }}>
+                  ✔
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
+      {lesson.worksheets && (
+        <>
+          <nav aria-label="Activities on this page" className="no-print mt-6 flex flex-wrap gap-2">
+            {lesson.worksheets.map((w) => (
+              <a
+                key={w.id}
+                href={`#${w.id}`}
+                className="rounded-full border px-3 py-1.5 text-sm font-medium hover:shadow-sm"
+                style={{ borderColor: kindStyle[w.kind].border, color: kindStyle[w.kind].accent, backgroundColor: kindStyle[w.kind].bg }}
+              >
+                <span aria-hidden="true">{kindStyle[w.kind].icon}</span> {w.title}
+              </a>
+            ))}
+          </nav>
+          {lesson.worksheets.map((w) => (
+            <div key={w.id}>
+              <Divider />
+              <WorksheetCard worksheet={w} />
+            </div>
+          ))}
         </>
       )}
 
@@ -266,27 +296,21 @@ export default async function LessonPage({ params }: Props) {
 
       {lesson.closing && <p className="mt-6 rounded-lg bg-slate-50 p-4 text-slate-700">{lesson.closing}</p>}
 
-      {lessonResources.length > 0 && (
-        <>
-          <Divider />
-          <h2 className="mb-4 text-xl font-semibold text-slate-900">Resources for This Lesson</h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {lessonResources.map((r) => (
-              <Link
-                key={r!.id}
-                href={`/resource-packages#${r!.id}`}
-                className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md"
-              >
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">{r!.type}</span>
-                <span className="mt-1 block font-semibold text-slate-900">📄 {r!.title}</span>
-                <span className="mt-1 block text-sm text-slate-600">{r!.description}</span>
-              </Link>
-            ))}
-          </div>
-        </>
+      {lesson.next && (
+        <div className="mt-8 rounded-xl border border-slate-200 p-5" style={{ backgroundColor: section.tint }}>
+          <h2 className="font-semibold text-slate-900">What’s Next</h2>
+          <p className="mt-2 leading-relaxed text-slate-700">{lesson.next}</p>
+        </div>
       )}
 
-      {lesson.kind === "lesson" && (
+      {lesson.sourceNote && (
+        <p className="mt-6 border-t border-slate-100 pt-4 text-xs leading-relaxed text-slate-500">
+          <span className="font-semibold">Source note: </span>
+          {lesson.sourceNote}
+        </p>
+      )}
+
+      {lesson.kind !== "practice" && (
         <>
           <Divider />
           <NotesBox storageKey={key} />
@@ -308,7 +332,7 @@ export default async function LessonPage({ params }: Props) {
             {next.section.id === section.id ? "Next Lesson →" : `Next: ${next.section.shortTitle} →`}
           </ButtonLink>
         ) : (
-          <ButtonLink href="/journal">Go to Reflection Journal →</ButtonLink>
+          <ButtonLink href="/toolkit">Go to My Toolkit →</ButtonLink>
         )}
       </div>
     </Card>

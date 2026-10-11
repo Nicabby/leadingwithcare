@@ -2,71 +2,145 @@ import Link from "next/link";
 import { binder, sections } from "@/content";
 import { ButtonLink, Card, Divider, SectionHeading } from "@/components/ui";
 import ContinueCard from "@/components/ContinueCard";
+import ExportBinder from "@/components/ExportBinder";
 
-const modules = sections.filter((s) => s.id !== "orientation" && s.id !== "summary");
+const ways = [
+  {
+    icon: "⏸",
+    title: "Pause & Check Reflections",
+    text: "Questions for your own thinking. They help you slow down, notice your reactions, question assumptions, and connect each concept to your own experience. Some may remain completely private.",
+    href: "/journal",
+    color: "#7f4f74",
+  },
+  {
+    icon: "🧰",
+    title: "Build Your Toolkit",
+    text: "Complete the practical tools introduced in the course. By the end, they form your personal Care-Centered Practice Toolkit—resources you can return to whenever you need them.",
+    href: "/toolkit",
+    color: "#24497b",
+  },
+  {
+    icon: "💬",
+    title: "Bring to Live Practice",
+    text: "Prepare a de-identified example, question, response, or draft tool to bring to your instructor-led session for scenarios, role-play, discussion, and peer feedback.",
+    href: "/live-practice",
+    color: "#a08453",
+  },
+];
+
+const tools = [
+  "Emotional Safety Check",
+  "Safety and Support Response Map",
+  "Bias and Unlearning Check",
+  "Cultural Responsiveness Check",
+  "Equity and Access Decision Guide",
+  "Lived Truth and Inquiry Framework",
+  "Care-Centered Practice Review Lens",
+];
 
 export default function Home() {
   return (
     <Card>
       <p className="text-sm font-semibold uppercase tracking-wider text-eap">Welcome</p>
-      <h1 className="mt-1 text-3xl font-bold text-slate-900">Your Leading with Care Binder</h1>
-      <p className="mt-3 text-lg text-slate-600">{binder.description}</p>
-      <p className="mt-3 text-slate-600">{binder.audience}</p>
+      <h1 className="mt-1 text-3xl font-bold text-slate-900">Your Leading with Care Digital Binder</h1>
+      {binder.description.map((p, i) => (
+        <p key={i} className={i === 0 ? "mt-3 text-lg text-slate-600" : "mt-3 text-slate-600"}>
+          {p}
+        </p>
+      ))}
 
       <ContinueCard />
 
       <Divider />
 
-      <SectionHeading>Course Modules</SectionHeading>
-      <div className="grid gap-4 sm:grid-cols-2">
-        {modules.map((s) => (
+      <SectionHeading>Three Ways You Will Use Your Binder</SectionHeading>
+      <div className="grid gap-4 md:grid-cols-3">
+        {ways.map((w) => (
           <Link
-            key={s.id}
-            href={`/sections/${s.id}`}
-            className="group rounded-xl border border-slate-200 border-l-8 bg-white p-5 shadow-sm transition hover:shadow-md"
-            style={{ borderLeftColor: s.color }}
+            key={w.href}
+            href={w.href}
+            className="group rounded-xl border border-slate-200 border-t-4 bg-white p-5 shadow-sm transition hover:shadow-md"
+            style={{ borderTopColor: w.color }}
           >
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{s.eyebrow}</p>
-            <p className="mt-1 text-lg font-bold text-slate-900 group-hover:underline">{s.shortTitle}</p>
-            <p className="mt-2 text-sm text-slate-600">{s.description}</p>
+            <p className="text-2xl" aria-hidden="true">
+              {w.icon}
+            </p>
+            <p className="mt-2 font-bold text-slate-900 group-hover:underline">{w.title}</p>
+            <p className="mt-2 text-sm text-slate-600">{w.text}</p>
           </Link>
         ))}
       </div>
 
       <Divider />
 
-      <SectionHeading>How to Use This Binder</SectionHeading>
+      <SectionHeading>Course Lessons</SectionHeading>
       <ol className="grid gap-3 sm:grid-cols-2">
-        {[
-          ["Review", "Each lesson condenses the course into key ideas, tools, and scenarios you can revisit anytime."],
-          ["Reflect", "Answer the Reflection in each lesson. Every response is collected in your Reflection Journal."],
-          ["Record", "Use Your Notes at the bottom of each lesson to capture your own insights."],
-          ["Practice", "Try the practice knowledge checks before completing the graded versions in the course."],
-          ["Download", "Open the password-protected Resource Packages for worksheets and reference tools."],
-          ["Export", "Download your Reflection Journal as a PDF to keep, print, or bring to a coaching conversation."],
-        ].map(([title, text], i) => (
-          <li key={title} className="flex gap-3 rounded-lg bg-slate-50 p-4">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
-              {i + 1}
-            </span>
-            <span>
-              <span className="block font-semibold text-slate-900">{title}</span>
-              <span className="text-sm text-slate-600">{text}</span>
-            </span>
+        {sections.map((s) => (
+          <li key={s.id}>
+            <Link
+              href={`/sections/${s.id}`}
+              className="group block h-full rounded-xl border border-slate-200 border-l-8 bg-white p-4 shadow-sm transition hover:shadow-md"
+              style={{ borderLeftColor: s.color }}
+            >
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{s.eyebrow}</p>
+              <p className="mt-1 font-bold text-slate-900 group-hover:underline">{s.shortTitle}</p>
+              <p className="mt-1 text-sm text-slate-600">{s.description}</p>
+            </Link>
           </li>
         ))}
       </ol>
 
+      <Divider />
+
+      <SectionHeading>Your Care-Centered Practice Toolkit</SectionHeading>
+      <p className="text-slate-600">As you move through the course, your binder gradually becomes your personal toolkit:</p>
+      <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+        {tools.map((t) => (
+          <li key={t} className="flex gap-3 rounded-lg bg-slate-50 p-3 text-slate-800">
+            <span aria-hidden="true">🧰</span>
+            {t}
+          </li>
+        ))}
+      </ul>
+
+      <Divider />
+
+      <SectionHeading>Your Reflections, Your Choice</SectionHeading>
+      <p className="text-slate-700">
+        Some questions invite you to reflect on your own experiences, assumptions, reactions, or areas for growth. These
+        reflections support learning—they do not require personal disclosure. You decide what you record and what you
+        choose to share. You do not need to share your private reflections unless you choose to.
+      </p>
+      <p className="mt-3 text-slate-700">When you bring an example into a live session:</p>
+      <ul className="mt-2 space-y-1.5 text-slate-700">
+        {[
+          "remove names and identifying details;",
+          "avoid including private or confidential information;",
+          "focus on the situation, decision, practice, or response, rather than identifying another person as the problem; and",
+          "share only what you are comfortable and authorized to discuss.",
+        ].map((t) => (
+          <li key={t} className="flex gap-2">
+            <span className="text-eap" aria-hidden="true">
+              •
+            </span>
+            {t}
+          </li>
+        ))}
+      </ul>
+
       <p className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
-        Your notes, reflections, and progress are saved privately in this browser on this device. Export your
-        Reflection Journal regularly to keep a copy.
+        Everything you write is saved privately in this browser on this device—no account needed. Because it lives only
+        here, export your binder to PDF regularly to keep a copy, and use the same device and browser throughout the
+        course.
       </p>
 
+      <ExportBinder />
+
       <div className="mt-8 flex flex-wrap justify-end gap-3">
-        <ButtonLink href="/resource-packages" variant="outline">
-          Resource Packages
+        <ButtonLink href="/toolkit" variant="outline">
+          My Toolkit
         </ButtonLink>
-        <ButtonLink href="/sections/orientation">Start Orientation →</ButtonLink>
+        <ButtonLink href={`/sections/${sections[0].id}`}>Start Lesson 1 →</ButtonLink>
       </div>
     </Card>
   );

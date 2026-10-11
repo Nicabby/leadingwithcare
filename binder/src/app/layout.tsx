@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     default: "Leading with Care Binder",
     template: "%s · Leading with Care Binder",
   },
-  description: "Learner binder for the Leading with Care course: key ideas, reflections, practice checks, and resources.",
+  description: "Digital Binder for the Leading with Care course: lesson reviews, Pause & Check reflections, your Care-Centered Practice Toolkit, and live-session preparation.",
   applicationName: "LWC Binder",
   appleWebApp: { capable: true, title: "LWC Binder" },
 };

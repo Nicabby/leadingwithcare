@@ -178,8 +178,8 @@ export default function Practice({ questions, storageKey }: { questions: Questio
             <p className="text-sm text-slate-600">
               {finished
                 ? score / questions.length >= 0.8
-                  ? "Great work—you’re ready for the graded knowledge check in the course."
-                  : "The course requires 80%. Review the lessons and try again."
+                  ? "Great work—you’re applying the course principles well."
+                  : "Review the lesson and the explanations above, then try again."
                 : "Correct so far: " + score}
             </p>
           </div>
