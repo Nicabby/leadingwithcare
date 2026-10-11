@@ -8,8 +8,8 @@ import { guide, sessions } from "@/content";
 
 const tools = [
   { href: "/handouts", title: "Handouts", sub: "Printable cards & worksheets", color: "#7f4f74", icon: "📄" },
-  { href: "/answer-key", title: "Answer Key", sub: "Knowledge checks + capstone", color: "#24497b", icon: "🔑" },
-  { href: "/quick-reference", title: "Quick Reference", sub: "Modules & course tools", color: "#cdb483", icon: "🧭" },
+  { href: "/answer-key", title: "Answer Key", sub: "All knowledge checks", color: "#24497b", icon: "🔑" },
+  { href: "/quick-reference", title: "Quick Reference", sub: "Lessons & toolkit", color: "#cdb483", icon: "🧭" },
 ];
 
 function NavContent({ onNavigate }: { onNavigate?: () => void }) {
@@ -59,7 +59,7 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
               <div className="text-sm leading-tight">
                 {s.number}. {s.title}
               </div>
-              <div className="mt-1 text-xs opacity-80">90 min · {s.segments.length} segments</div>
+              <div className="mt-1 text-xs opacity-80">90 min · {s.status}</div>
             </Link>
           );
         })}

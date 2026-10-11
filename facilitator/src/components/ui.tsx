@@ -80,6 +80,7 @@ const modeStyles: Record<Mode, string> = {
   Individual: "bg-[#f1f2fb] text-[#3f4595]",
   "Screen share": "bg-slate-100 text-slate-700",
   Whiteboard: "bg-slate-100 text-slate-700",
+  Survey: "bg-[#f9f5ec] text-[#6b5a2e]",
 };
 
 export function ModeBadge({ mode }: { mode: Mode }) {

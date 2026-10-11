@@ -4,14 +4,14 @@ Standalone Next.js site for facilitators of the Leading with Care live virtual s
 
 ## Pages
 - `/` Start Here — program at a glance, principles, debrief sequence, virtual delivery
-- `/sessions/session-1` … `session-4` — purpose, objectives, prep checklist, learner message, run of show, fully scripted facilitation guide, discussion bank, slide outline, handouts, troubleshooting, after-session reflection
+- `/sessions/session-1` … `session-6` — every session uses the same layout: Session Overview · Before the Session · 90-Minute Run of Show · Facilitation Guide (per major activity: purpose, set-up, facilitator language, instructions, debrief, listen for, watch for, Digital Binder connection) · Close
 - `/handouts` — printable role cards, scenario cards, observer sheets, worksheets
-- `/answer-key` — knowledge checks + capstone (reads the learner binder's question data in `src/content/course`)
-- `/quick-reference` — module summary, reference card, and course tools
+- `/answer-key` — all lesson knowledge checks + the Final Knowledge Check (reads the learner binder's question data in `src/content/course`)
+- `/quick-reference` — lesson focus, Pause & Check, and the Care-Centered Practice Toolkit at a glance
 - `/print` — the combined print edition used to generate the PDF
 
 ## Editing content
-**Currently placeholder content** marked `[Placeholder]`. Session content lives in `src/content/session1.ts` … `session4.ts` and `src/content/handouts.ts`; the module summary and course tools are in `src/components/QuickReference.tsx`.
+Sessions are currently an **outline**: structure and draft content drawn from the course, with open items written as `[TBD …]` (highlighted in the guide). Session content lives in `src/content/session1.ts` … `session6.ts`; handouts in `src/content/handouts.ts`. Change a session's `status` to `"Draft"` or `"Final"` as it is completed.
 
 `src/content/course/` is a copy of the binder's `src/content` course files (used for the answer key) — copy them across again whenever the binder content changes.
 

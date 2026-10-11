@@ -7,16 +7,17 @@ export default function StartHere({ print = false }: { print?: boolean }) {
   return (
     <div>
       <p className="text-lg leading-relaxed text-slate-700">
-        This guide is the live-session companion to the Leading with Care eLearning and{" "}
+        This guide is the live-session companion to the Leading with Care course and{" "}
         <a href={guide.learnerBinderUrl} className="text-eap underline" target="_blank" rel="noopener noreferrer">
           learner binder
         </a>
         . It does not reproduce the online course. Instead, it gives facilitators the purpose, concepts, suggested language, timing, activity
-        structures, and materials needed to help emerging leaders turn course ideas into observable leadership behaviors.
+        structures, and materials needed to help participants turn course ideas into everyday care-centered leadership practice.
       </p>
 
       <Callout title="Program through-line">
-        [Placeholder] The program through-line for Leading with Care.
+        Leaders shape participation through the conditions they create. Every session practices the same move—slowing the space between
+        what we observe and how we respond—and builds the Care-Centered Practice Toolkit participants keep after the course.
       </Callout>
 
       <H2>Program at a Glance</H2>
@@ -25,8 +26,8 @@ export default function StartHere({ print = false }: { print?: boolean }) {
           <thead>
             <tr className="bg-navy text-white">
               <th scope="col" className="p-3 font-semibold">Session</th>
-              <th scope="col" className="p-3 font-semibold">eLearning before</th>
-              <th scope="col" className="p-3 font-semibold">Key practice activities</th>
+              <th scope="col" className="p-3 font-semibold">Module(s) covered</th>
+              <th scope="col" className="p-3 font-semibold">Major activities</th>
             </tr>
           </thead>
           <tbody>
@@ -40,15 +41,15 @@ export default function StartHere({ print = false }: { print?: boolean }) {
                 </td>
                 <td className="p-3 text-slate-700">
                   <ul className="list-disc space-y-1 pl-4">
-                    {s.elearning.before.map((b) => (
-                      <li key={b}>{b.split(":")[0]}</li>
+                    {s.overview.modules.map((m) => (
+                      <li key={m}>{m}</li>
                     ))}
                   </ul>
                 </td>
                 <td className="p-3 text-slate-700">
-                  {s.segments
-                    .filter((seg) => /Activity|Fishbowl|Practice|Decision|role-play|Capstone/i.test(seg.title))
-                    .map((seg) => seg.title.replace(/^(Activity|Practice|Breakout role-play|Capstone breakout): /, ""))
+                  {s.runOfShow
+                    .filter((r) => r.guide)
+                    .map((r) => r.activity)
                     .join(" · ")}
                 </td>
               </tr>
@@ -57,18 +58,18 @@ export default function StartHere({ print = false }: { print?: boolean }) {
         </table>
       </div>
       <p className="mt-2 text-sm text-slate-500">
-        After the final session, learners complete the Summary and Capstone and export their Reflection Journal.
+        Each session is 90 minutes and virtual. Participants complete the matching lessons and Digital Binder activities before each session.
       </p>
 
       <H2>How Each Session Page Is Organized</H2>
       <div className="grid gap-3 sm:grid-cols-2 print:grid-cols-2">
         {[
-          ["Purpose, objectives & why it matters", "The intent of the session and what learners should be able to do."],
-          ["Concept map", "A quick reminder of the course ideas the session builds on."],
-          ["Before the session", "Prep checklist, eLearning pre-work, materials, and a ready-to-send learner message."],
-          ["Run of show", "A 90-minute timeline with the participation mode for each segment."],
-          ["Facilitation guide", "Suggested language, steps, chat text, polls, scenarios (youth + workplace), debriefs, and what to listen for."],
-          ["Slides, handouts & troubleshooting", "A slide outline, printable handouts, “If this happens…” responses, and an after-session reflection."],
+          ["1. Session Overview", "Module(s) covered, session purpose, learning objectives, key course concepts, and toolkit resources used."],
+          ["2. Before the Session", "Learner pre-work, what learners were asked to bring, facilitator preparation, materials/technology, and breakout room setup."],
+          ["3. 90-Minute Run of Show", "A timed agenda with the activity, purpose, method, and facilitator notes for each segment."],
+          ["4. Facilitation Guide", "For every major activity: purpose, set-up, facilitator language, instructions, debrief questions, listen for, watch for, and the Digital Binder connection."],
+          ["5. Close", "Reflection, what to carry forward, and the next module/pre-work."],
+          ["Open items", "Anything still to be confirmed is highlighted like this: [TBD]."],
         ].map(([t, d]) => (
           <div key={t} className="avoid-break rounded-xl border border-slate-200 p-4">
             <p className="font-semibold text-slate-900">{t}</p>
@@ -106,8 +107,8 @@ export default function StartHere({ print = false }: { print?: boolean }) {
         items={[
           "Share the binder link in chat at the start of every session.",
           "Learners’ Reflections are private and saved in their own browser. Invite sharing, never require it.",
-          "Point learners to Resource Packages for worksheets that match each module.",
-          "Encourage learners to export their Reflection Journal as a PDF at the end of the program.",
+          "Each lesson’s ‘Bring to Live Practice’ activity tells learners what to prepare for the next session; the Live Practice Prep page collects them.",
+          "Remind learners to download a backup from Back Up & Restore after each session, and to export My Toolkit or the whole binder as a PDF at the end.",
         ]}
       />
     </div>

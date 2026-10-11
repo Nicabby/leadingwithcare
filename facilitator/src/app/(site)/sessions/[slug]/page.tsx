@@ -24,19 +24,6 @@ export default async function SessionPage({ params }: Props) {
   const next = sessions[session.number];
   return (
     <Card>
-      <nav aria-label="On this page" className="no-print mb-6 flex flex-wrap gap-2 text-sm">
-        {[
-          ["objectives", "Objectives"],
-          ["prepare", "Before the session"],
-          ["run-of-show", "Run of show"],
-          ["facilitation", "Facilitation guide"],
-          ["slides", "Slides & handouts"],
-        ].map(([id, label]) => (
-          <a key={id} href={`#${id}`} className="rounded-full border border-slate-300 px-3 py-1 text-slate-700 hover:bg-slate-100">
-            {label}
-          </a>
-        ))}
-      </nav>
       <SessionView session={session} />
       <div className="no-print mt-10 flex flex-wrap justify-between gap-3 border-t border-slate-200 pt-6">
         <ButtonLink href={prev ? `/sessions/${prev.slug}` : "/"} variant="outline">

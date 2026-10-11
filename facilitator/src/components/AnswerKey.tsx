@@ -1,10 +1,7 @@
-import { module1 } from "@/content/course/module1";
-import { module2 } from "@/content/course/module2";
-import { module3 } from "@/content/course/module3";
-import { summary } from "@/content/course/summary";
+import { sections } from "@/content/course";
 import type { Lesson, Question } from "@/content/course/types";
 
-const checks = [module1, module2, module3, summary].flatMap((section) =>
+const checks = sections.flatMap((section) =>
   section.lessons.filter((l): l is Lesson & { questions: Question[] } => l.kind === "practice" && !!l.questions).map((lesson) => ({ section, lesson })),
 );
 
@@ -51,21 +48,21 @@ export default function AnswerKey({ print = false }: { print?: boolean }) {
   return (
     <div>
       <p className="text-slate-600">
-        Answers and rationales for the knowledge checks and the Capstone Assessment, matching the practice versions in the learner binder.
-        Learners need 80% to pass each knowledge check in the course, with unlimited attempts. Use this key to prepare, to address common
-        misconceptions in live sessions, and to support learners who are stuck—not to share answers directly.
+        Answers and rationales for the lesson knowledge checks and the Final Knowledge Check, matching the practice versions in the learner
+        binder. Use this key to prepare, to address common misconceptions in live sessions, and to support learners who are stuck—not to share
+        answers directly. [TBD: confirm passing score and attempts in the LMS]
       </p>
       {!print && (
         <nav aria-label="Answer key contents" className="mt-4 flex flex-wrap gap-2">
-          {checks.map(({ lesson }) => (
-            <a key={lesson.slug} href={`#${lesson.slug}`} className="rounded-full border border-slate-300 px-3 py-1 text-sm text-slate-700 hover:bg-slate-100">
-              {lesson.title}
+          {checks.map(({ section, lesson }) => (
+            <a key={section.id} href={`#${section.id}-${lesson.slug}`} className="rounded-full border border-slate-300 px-3 py-1 text-sm text-slate-700 hover:bg-slate-100">
+              {section.shortTitle}
             </a>
           ))}
         </nav>
       )}
       {checks.map(({ section, lesson }) => (
-        <section key={lesson.slug} id={lesson.slug} className="mt-10 scroll-mt-20">
+        <section key={section.id} id={`${section.id}-${lesson.slug}`} className="mt-10 scroll-mt-20">
           <div className="avoid-break-after border-l-4 pl-4" style={{ borderLeftColor: section.color }}>
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{section.title}</p>
             <h2 className="text-xl font-bold text-slate-900">{lesson.title}</h2>

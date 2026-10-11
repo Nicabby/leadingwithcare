@@ -8,7 +8,8 @@ export type Mode =
   | "Fishbowl"
   | "Individual"
   | "Screen share"
-  | "Whiteboard";
+  | "Whiteboard"
+  | "Survey";
 
 /** A scenario offered in two versions so facilitators can match their group. */
 export type DualScenario = {
@@ -17,30 +18,38 @@ export type DualScenario = {
   workplace: string;
 };
 
-export type Segment = {
-  id: string;
-  start: number;
-  end: number;
-  title: string;
-  modes: Mode[];
-  goal: string;
+/**
+ * Text containing "[TBD" is highlighted in the guide so open items are easy to spot.
+ */
+export type ActivityGuide = {
+  purpose: string;
+  setup: string[];
   /** Suggested facilitator language — adapt, don't read verbatim. */
-  say?: string[];
-  steps?: string[];
-  /** Text to paste into Zoom chat or broadcast to breakout rooms. */
+  say: string[];
+  instructions: string[];
+  /** Text to paste into chat or broadcast to breakout rooms. */
   chat?: string;
-  poll?: { question: string; options: string[]; note?: string };
   scenarios?: DualScenario[];
-  debrief?: string[];
-  listenFor?: string[];
-  tip?: string;
-  ifShort?: string;
+  debrief: string[];
+  listenFor: string[];
+  watchFor: string[];
+  /** How the activity connects to the learner Digital Binder. */
+  binder: string[];
   handouts?: string[];
 };
 
-export type Slide = { title: string; bullets: string[]; notes?: string };
-
-export type Challenge = { challenge: string; response: string };
+export type RunItem = {
+  id: string;
+  start: number;
+  end: number;
+  activity: string;
+  purpose: string;
+  method: string;
+  modes: Mode[];
+  notes: string;
+  /** Major activities get a full facilitation guide. */
+  guide?: ActivityGuide;
+};
 
 export type Session = {
   number: number;
@@ -51,20 +60,27 @@ export type Session = {
   color: string;
   ink: string;
   tint: string;
-  purpose: string;
-  objectives: string[];
-  why: string;
-  concepts: { title: string; text: string }[];
-  elearning: { before: string[]; after: string[] };
-  materials: string[];
-  prep: string[];
-  learnerMessage: string;
-  segments: Segment[];
-  discussion: string[];
-  slides: Slide[];
-  handouts: string[];
-  challenges: Challenge[];
-  afterReflection: string[];
+  status: "Outline" | "Draft" | "Final";
+  overview: {
+    modules: string[];
+    purpose: string;
+    objectives: string[];
+    concepts: { title: string; text: string }[];
+    toolkit: string[];
+  };
+  before: {
+    prework: string[];
+    bring: string[];
+    prep: string[];
+    materials: string[];
+    breakouts: string[];
+  };
+  runOfShow: RunItem[];
+  close: {
+    reflection: string[];
+    carryForward: string[];
+    next: string[];
+  };
 };
 
 export type HandoutBlock =

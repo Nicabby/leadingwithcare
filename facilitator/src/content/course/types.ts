@@ -1,6 +1,7 @@
 export type KeyIdea = {
   title: string;
   text: string;
+  points?: string[];
   tip?: string;
 };
 
@@ -44,11 +45,51 @@ export type Scenario = {
   closing?: string;
 };
 
-export type Reflection = {
-  intro: string;
-  prompt: string;
-  digDeeper: string;
-  finish: string;
+/** A fillable binder activity. Responses are saved per field in the learner's browser. */
+export type WorksheetKind = "pause" | "toolkit" | "activity" | "live";
+
+export type Field = {
+  id: string;
+  /** question or sentence stem shown above the box */
+  label: string;
+  rows?: number;
+  placeholder?: string;
+};
+
+export type WorksheetStep = {
+  /** e.g. "Step 1" or "Notice" */
+  label?: string;
+  title?: string;
+  text?: string;
+  /** questions to consider */
+  ask?: string[];
+  /** list heading + items, e.g. "Consider factors such as:" */
+  listTitle?: string;
+  list?: string[];
+  consider?: string;
+  example?: string;
+  fields?: Field[];
+};
+
+export type Worksheet = {
+  /** globally unique id — also the storage key and page anchor */
+  id: string;
+  kind: WorksheetKind;
+  title: string;
+  /** small label above the title, e.g. "Build Your Toolkit" */
+  eyebrow?: string;
+  intro?: string[];
+  /** a field shown first, e.g. the de-identified situation being reviewed */
+  situation?: Field;
+  steps: WorksheetStep[];
+  /** read-only worked example shown in a collapsible panel */
+  example?: { title: string; intro?: string; rows: [string, string][] };
+  /** closing sentence stems ("Complete the Reflection") */
+  complete?: { title: string; intro?: string; fields: Field[] };
+  /** extra commitments ("Add to Your Digital Binder") */
+  commit?: { title: string; intro?: string; fields: Field[]; after?: string };
+  useWhen?: string[];
+  closing?: string;
 };
 
 export type Question =
@@ -74,7 +115,7 @@ export type Lesson = {
   slug: string;
   title: string;
   subtitle: string;
-  kind: "lesson" | "practice";
+  kind: "lesson" | "binder" | "practice";
   summary: string;
   overview: string[];
   objectives?: string[];
@@ -85,10 +126,12 @@ export type Lesson = {
   tools?: Tool[];
   comparison?: Comparison;
   scenarios?: Scenario[];
-  reflection?: Reflection;
+  worksheets?: Worksheet[];
+  sourceNote?: string;
   takeaways?: string[];
   closing?: string;
-  resources?: string[];
+  /** "What's next" bridge to the following lesson */
+  next?: string;
   /** practice only */
   scenarioIntro?: string;
   questions?: Question[];
@@ -108,15 +151,4 @@ export type Section = {
   keyConcept?: string;
   objectives: string[];
   lessons: Lesson[];
-};
-
-export type Resource = {
-  id: string;
-  title: string;
-  sectionId: string;
-  type: string;
-  description: string;
-  why: string;
-  file?: string;
-  size?: string;
 };
