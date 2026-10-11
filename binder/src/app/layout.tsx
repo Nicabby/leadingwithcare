@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Sidebar from "@/components/Sidebar";
+import StorageBanner from "@/components/StorageBanner";
 import { binder } from "@/content";
 import "./globals.css";
 
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <p className="text-2xl font-bold text-gray-800 sm:text-3xl">{binder.heading}</p>
                 <p className="mt-1 text-sm text-slate-600 sm:text-base">{binder.tagline}</p>
               </header>
+              <StorageBanner />
               {children}
             </div>
           </main>

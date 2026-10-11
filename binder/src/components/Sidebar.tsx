@@ -12,6 +12,7 @@ const tools = [
   { href: "/journal", title: "Pause & Check Journal", sub: "Reflections · Export to PDF", color: "#7f4f74", icon: "⏸" },
   { href: "/live-practice", title: "Live Practice Prep", sub: "Bring to class", color: "#cdb483", icon: "💬" },
   { href: "/your-notes", title: "Your Notes", sub: "All your learning notes", color: "#6b7280", icon: "📝" },
+  { href: "/backup", title: "Back Up & Restore", sub: "Keep or move your work", color: "#467edd", icon: "💾" },
 ];
 
 function NavContent({ onNavigate }: { onNavigate?: () => void }) {

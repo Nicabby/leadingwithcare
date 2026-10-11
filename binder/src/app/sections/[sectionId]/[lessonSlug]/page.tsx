@@ -6,6 +6,7 @@ import type { Scenario, Section } from "@/content";
 import { ButtonLink, Card, Divider, Quote } from "@/components/ui";
 import WorksheetCard from "@/components/lesson/WorksheetCard";
 import { kindStyle } from "@/components/lesson/kindStyle";
+import SaveReminder from "@/components/SaveReminder";
 import NotesBox from "@/components/lesson/NotesBox";
 import CompleteToggle from "@/components/lesson/CompleteToggle";
 import Practice from "@/components/lesson/Practice";
@@ -258,6 +259,7 @@ export default async function LessonPage({ params }: Props) {
 
       {lesson.worksheets && (
         <>
+          <SaveReminder />
           <nav aria-label="Activities on this page" className="no-print mt-6 flex flex-wrap gap-2">
             {lesson.worksheets.map((w) => (
               <a

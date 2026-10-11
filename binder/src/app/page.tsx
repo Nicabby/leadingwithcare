@@ -129,9 +129,12 @@ export default function Home() {
       </ul>
 
       <p className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
-        Everything you write is saved privately in this browser on this device—no account needed. Because it lives only
-        here, export your binder to PDF regularly to keep a copy, and use the same device and browser throughout the
-        course.
+        Everything you write is saved privately in this browser on this device—no account needed. Use the same device
+        and browser throughout the course, and{" "}
+        <Link href="/backup" className="font-medium text-eap hover:underline">
+          download a backup
+        </Link>{" "}
+        regularly so you can restore your work or move it to another device.
       </p>
 
       <ExportBinder />

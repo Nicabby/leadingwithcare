@@ -6,6 +6,7 @@ import { allWorksheets, lessonHref, sections, worksheetFields, type WorksheetKin
 import { Card } from "@/components/ui";
 import WorksheetCard from "@/components/lesson/WorksheetCard";
 import { kindStyle } from "@/components/lesson/kindStyle";
+import SaveReminder from "@/components/SaveReminder";
 import { exportWorksheetsPdf } from "@/lib/pdf";
 import { filledCount, setName, useBinder, useHydrated } from "@/lib/store";
 
@@ -112,10 +113,7 @@ export default function WorksheetCollection({ kinds, icon, title, description, p
 
       <NameAndExport kinds={kinds} pdf={pdf} accent={k.accent} tint={k.bg} border={k.border} countLabel="activities" />
 
-      <p className="mt-4 text-sm text-slate-500">
-        Everything you write is private and saved only in this browser on this device. You can work here or on each
-        lesson’s Binder Activities page—both stay in sync.
-      </p>
+      <SaveReminder />
 
       {sections.map((section) => {
         const items = allWorksheets.filter((r) => r.section.id === section.id && kinds.includes(r.worksheet.kind));

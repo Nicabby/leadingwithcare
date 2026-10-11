@@ -10,8 +10,12 @@ The participant companion site for the Leading with Care course (Elevate Adolesc
 - **My Toolkit** (`/toolkit`), **Pause & Check Journal** (`/journal`), **Live Practice Prep** (`/live-practice`): every activity of that type in one place, with export to PDF.
 - **Your Notes** (`/your-notes`): lesson notes, with export to PDF.
 - **Export Your Whole Binder** (home page): one PDF of everything.
+- **Back Up & Restore** (`/backup`): learners download a backup file (.json) of their whole binder and restore it on another device or browser.
 
-Responses are saved only in the participant's browser (localStorage), so there is no login or database. Participants should use the same device and browser and export PDFs regularly.
+Responses are saved only in the participant's browser (localStorage), so there is no login or database. Safeguards:
+- a red warning appears on every page if the browser is blocking saving (private/incognito windows, blocked site data, full storage);
+- activity pages remind learners where their work is saved, and prompt them to back up if they have answers but no backup in the last 7 days;
+- the site asks supporting browsers to keep its data persistent.
 
 ## Editing content
 All text lives in `src/content/`. Edit a lesson file to change wording; no page code changes needed. Activity responses are stored by the `id` of each worksheet and field, so **don't rename ids after launch** or saved answers will stop appearing.
