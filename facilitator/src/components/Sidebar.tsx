@@ -4,13 +4,90 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { guide, sessions } from "@/content";
+import { guide, sessions, type Session } from "@/content";
 
 const tools = [
   { href: "/handouts", title: "Handouts", sub: "Printable cards & worksheets", color: "#7f4f74", icon: "📄" },
   { href: "/answer-key", title: "Answer Key", sub: "All knowledge checks", color: "#24497b", icon: "🔑" },
   { href: "/quick-reference", title: "Quick Reference", sub: "Lessons & toolkit", color: "#cdb483", icon: "🧭" },
 ];
+
+function SessionGroup({ session: s, pathname, onNavigate }: { session: Session; pathname: string; onNavigate?: () => void }) {
+  const href = `/sessions/${s.slug}`;
+  const active = pathname === href;
+  const [open, setOpen] = useState(active);
+  useEffect(() => {
+    if (active) setOpen(true);
+  }, [active]);
+  const listId = `nav-${s.slug}`;
+  const items: { id: string; label: string; time?: string; icon: string }[] = [
+    { id: "overview", label: "Session Overview", icon: "🎯" },
+    { id: "before", label: "Before the Session", icon: "✅" },
+    { id: "run-of-show", label: "90-Minute Run of Show", icon: "⏱" },
+    ...s.runOfShow
+      .filter((r) => r.guide)
+      .map((r) => ({ id: r.id, label: r.activity, time: `${r.start}–${r.end}`, icon: "▸" })),
+    { id: "close", label: "Close", icon: "⏸" },
+  ];
+
+  return (
+    <div className="rounded-r-xl border-l-4" style={{ borderLeftColor: s.color }}>
+      <div
+        className={`flex items-stretch rounded-r-xl ${active ? "shadow-md" : "hover:bg-slate-50"}`}
+        style={{ backgroundColor: active ? s.color : undefined, color: active ? s.ink : undefined }}
+      >
+        <Link
+          href={href}
+          onClick={onNavigate}
+          aria-current={active ? "page" : undefined}
+          className={`min-w-0 flex-1 p-3 ${active ? "font-semibold" : "font-medium text-gray-700"}`}
+        >
+          <div className="text-sm leading-tight">
+            {s.number}. {s.title}
+          </div>
+          <div className="mt-1 text-xs opacity-80">90 min · {s.status}</div>
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls={listId}
+          aria-label={`${open ? "Collapse" : "Expand"} Session ${s.number}`}
+          className="shrink-0 px-2.5 text-lg opacity-70 hover:opacity-100"
+        >
+          <span aria-hidden="true" className={`inline-block transition-transform ${open ? "rotate-90" : ""}`}>
+            ›
+          </span>
+        </button>
+      </div>
+
+      {open && (
+        <ul id={listId} className="ml-2 mt-1 space-y-0.5 border-l border-slate-200 py-1 pl-2">
+          {s.overview.modules.length > 0 && (
+            <li className="px-2 pb-1 text-xs italic leading-snug text-slate-500">{s.overview.modules.filter((m) => /Lesson \d/.test(m)).join(" · ")}</li>
+          )}
+          {items.map((it) => (
+            <li key={it.id}>
+              <Link
+                href={`${href}#${it.id}`}
+                onClick={onNavigate}
+                className={`flex items-start gap-2 rounded-md px-2 py-1 leading-snug hover:bg-slate-50 ${
+                  it.time ? "text-xs text-gray-600 hover:text-gray-900" : "text-sm text-gray-700"
+                }`}
+              >
+                <span aria-hidden="true" className="w-4 shrink-0 text-center text-xs leading-5">
+                  {it.icon}
+                </span>
+                <span className="flex-1">{it.label}</span>
+                {it.time && <span className="shrink-0 tabular-nums text-[11px] leading-5 text-slate-400">{it.time}</span>}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 function NavContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
@@ -45,24 +122,9 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
 
       <h2 className="mb-3 mt-6 text-center text-lg font-bold text-gray-800">Live Sessions</h2>
       <nav aria-label="Live sessions" className="space-y-2">
-        {sessions.map((s) => {
-          const active = pathname === `/sessions/${s.slug}`;
-          return (
-            <Link
-              key={s.slug}
-              href={`/sessions/${s.slug}`}
-              onClick={onNavigate}
-              aria-current={active ? "page" : undefined}
-              className={item(active)}
-              style={{ borderLeftColor: s.color, backgroundColor: active ? s.color : undefined, color: active ? s.ink : undefined }}
-            >
-              <div className="text-sm leading-tight">
-                {s.number}. {s.title}
-              </div>
-              <div className="mt-1 text-xs opacity-80">90 min · {s.status}</div>
-            </Link>
-          );
-        })}
+        {sessions.map((s) => (
+          <SessionGroup key={s.slug} session={s} pathname={pathname} onNavigate={onNavigate} />
+        ))}
       </nav>
 
       <div className="my-6 border-t border-slate-200" />

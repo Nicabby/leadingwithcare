@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { sections } from "@/content";
+import { lessonHref, sections, type Section } from "@/content";
+import { kindStyle } from "@/components/lesson/kindStyle";
 import { lessonKey, useBinder } from "@/lib/store";
 
 const tools = [
@@ -14,6 +15,110 @@ const tools = [
   { href: "/your-notes", title: "Your Notes", sub: "All your learning notes", color: "#6b7280", icon: "📝" },
   { href: "/backup", title: "Back Up & Restore", sub: "Keep or move your work", color: "#467edd", icon: "💾" },
 ];
+
+const pageIcon: Record<string, string> = { lesson: "📖", binder: "✏️", practice: "✅" };
+
+function SectionGroup({
+  section: s,
+  pathname,
+  completed,
+  onNavigate,
+}: {
+  section: Section;
+  pathname: string;
+  completed: string[];
+  onNavigate?: () => void;
+}) {
+  const inSection = pathname === `/sections/${s.id}` || pathname.startsWith(`/sections/${s.id}/`);
+  const [open, setOpen] = useState(inSection);
+  useEffect(() => {
+    if (inSection) setOpen(true);
+  }, [inSection]);
+  const done = s.lessons.filter((l) => completed.includes(lessonKey(s.id, l.slug))).length;
+  const listId = `nav-${s.id}`;
+
+  return (
+    <div className="rounded-r-xl border-l-4" style={{ borderLeftColor: s.color }}>
+      <div
+        className={`flex items-stretch rounded-r-xl ${inSection ? "shadow-md" : "hover:bg-slate-50"}`}
+        style={{ backgroundColor: inSection ? s.color : undefined, color: inSection ? s.ink : undefined }}
+      >
+        <Link
+          href={`/sections/${s.id}`}
+          onClick={onNavigate}
+          aria-current={pathname === `/sections/${s.id}` ? "page" : undefined}
+          className={`min-w-0 flex-1 p-3 ${inSection ? "font-semibold" : "font-medium text-gray-700"}`}
+        >
+          <div className="text-sm leading-tight">{s.shortTitle}</div>
+          <div className="mt-1 flex justify-between gap-2 text-xs opacity-80">
+            <span>{s.eyebrow}</span>
+            {done > 0 && <span>{done === s.lessons.length ? "✓ Complete" : `${done}/${s.lessons.length} done`}</span>}
+          </div>
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls={listId}
+          aria-label={`${open ? "Collapse" : "Expand"} ${s.shortTitle}`}
+          className="shrink-0 px-2.5 text-lg opacity-70 hover:opacity-100"
+        >
+          <span aria-hidden="true" className={`inline-block transition-transform ${open ? "rotate-90" : ""}`}>
+            ›
+          </span>
+        </button>
+      </div>
+
+      {open && (
+        <ul id={listId} className="ml-2 mt-1 space-y-0.5 border-l border-slate-200 py-1 pl-2">
+          {s.lessons.map((l) => {
+            const href = lessonHref(s.id, l.slug);
+            const active = pathname === href;
+            const isDone = completed.includes(lessonKey(s.id, l.slug));
+            return (
+              <li key={l.slug}>
+                <Link
+                  href={href}
+                  onClick={onNavigate}
+                  aria-current={active ? "page" : undefined}
+                  className={`flex items-start gap-2 rounded-md px-2 py-1.5 text-sm ${
+                    active ? "bg-slate-100 font-semibold text-gray-900" : "text-gray-700 hover:bg-slate-50"
+                  }`}
+                >
+                  <span aria-hidden="true" className="w-4 shrink-0 text-center text-xs leading-5">
+                    {pageIcon[l.kind] ?? "•"}
+                  </span>
+                  <span className="flex-1 leading-snug">{l.title}</span>
+                  {isDone && (
+                    <span className="text-xs leading-5 text-emerald-700" aria-label="completed">
+                      ✓
+                    </span>
+                  )}
+                </Link>
+                {l.worksheets && l.worksheets.length > 0 && (
+                  <ul className="mb-1 ml-6 space-y-0.5">
+                    {l.worksheets.map((w) => (
+                      <li key={w.id}>
+                        <Link
+                          href={`${href}#${w.id}`}
+                          onClick={onNavigate}
+                          className="flex gap-1.5 rounded px-1.5 py-1 text-xs leading-snug text-gray-600 hover:bg-slate-50 hover:text-gray-900"
+                        >
+                          <span aria-hidden="true">{kindStyle[w.kind].icon}</span>
+                          <span>{w.title}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 function NavContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
@@ -44,32 +149,9 @@ function NavContent({ onNavigate }: { onNavigate?: () => void }) {
 
       <h2 className="mt-6 mb-4 text-center text-lg font-bold text-gray-800">Course Lessons</h2>
       <nav aria-label="Course lessons" className="space-y-2">
-        {sections.map((s) => {
-          const active = pathname === `/sections/${s.id}` || pathname.startsWith(`/sections/${s.id}/`);
-          const done = s.lessons.filter((l) => completed.includes(lessonKey(s.id, l.slug))).length;
-          return (
-            <Link
-              key={s.id}
-              href={`/sections/${s.id}`}
-              onClick={onNavigate}
-              aria-current={active ? "page" : undefined}
-              className={`relative block border-l-4 p-3 transition-all duration-200 ${
-                active ? "rounded-xl font-semibold shadow-md" : "rounded-r-xl font-medium text-gray-700 hover:bg-slate-50 hover:shadow-sm"
-              }`}
-              style={{
-                borderLeftColor: s.color,
-                backgroundColor: active ? s.color : undefined,
-                color: active ? s.ink : undefined,
-              }}
-            >
-              <div className="text-sm leading-tight">{s.shortTitle}</div>
-              <div className="mt-1 flex justify-between text-xs opacity-80">
-                <span>{s.eyebrow}</span>
-                {done > 0 && <span>{done === s.lessons.length ? "✓ Complete" : `${done} done`}</span>}
-              </div>
-            </Link>
-          );
-        })}
+        {sections.map((s) => (
+          <SectionGroup key={s.id} section={s} pathname={pathname} completed={completed} onNavigate={onNavigate} />
+        ))}
       </nav>
 
       <div className="my-6 border-t border-slate-200" />
