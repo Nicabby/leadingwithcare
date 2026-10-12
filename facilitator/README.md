@@ -28,5 +28,5 @@ npm run build        # rebuild so the new PDF is served
 The PDF is saved to `public/Leading-with-Care-Facilitator-Guide.pdf`.
 
 ## Deploy
-`vercel --prod` from this folder, or push to GitHub and import in Vercel.
+Live site: https://leadingwithcare-4v1e.vercel.app (Vercel project root directory: `facilitator`). Pushes to `main` redeploy automatically.
 The site is set to `noindex` so it won't appear in search results; it is not password protected.

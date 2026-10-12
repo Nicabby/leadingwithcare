@@ -21,7 +21,7 @@ Responses are saved only in the participant's browser (localStorage), so there i
 All text lives in `src/content/`. Edit a lesson file to change wording; no page code changes needed. Activity responses are stored by the `id` of each worksheet and field, so **don't rename ids after launch** or saved answers will stop appearing.
 
 ## Links for the Rise course ("Open your Digital Binder" buttons)
-Replace `https://YOUR-SITE.vercel.app` with your Vercel URL.
+Live site: https://leadingwithcare.vercel.app — prefix each path below with it.
 
 | Lesson | Link |
 |---|---|

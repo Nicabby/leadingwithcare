@@ -12,7 +12,7 @@ export const guide = {
   title: "Leading with Care Facilitator Guide",
   short: "Facilitator Guide",
   tagline: "Six live virtual sessions that extend the Leading with Care course through discussion, scenario practice, reflection, and application.",
-  learnerBinderUrl: "https://leadingwithcare-binder.vercel.app" /* TODO: replace with the deployed binder URL */,
+  learnerBinderUrl: "https://leadingwithcare.vercel.app",
   pdfPath: "/Leading-with-Care-Facilitator-Guide.pdf",
 };
 

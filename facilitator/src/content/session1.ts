@@ -142,7 +142,7 @@ export const session1: Session = {
           "Point out the privacy guidance for bringing examples: remove names and identifying details, focus on the situation, and share only what you are comfortable and authorized to discuss.",
           "Ask learners to download a backup now if they have already completed Lessons 1 and 2.",
         ],
-        chat: "Digital Binder: [TBD: binder link]\nOpen Back Up & Restore → Download my binder backup. Keep the file somewhere only you can access.",
+        chat: "Digital Binder: https://leadingwithcare.vercel.app\nOpen Back Up & Restore → Download my binder backup. Keep the file somewhere only you can access.",
         debrief: ["What questions do you have about privacy or saving your work?"],
         listenFor: ["Learners on work-managed or shared computers", "Anyone who sees the red “browser isn’t saving” warning"],
         watchFor: ["Learners who completed pre-work on a different device than they are using now—show them Restore"],
