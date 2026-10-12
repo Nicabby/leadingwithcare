@@ -61,7 +61,7 @@ export const session2: Session = {
       "Remind yourself that escalation processes vary by learners’ settings: the goal is for each learner to know their own process, not to learn a single procedure.",
       "Have the Digital Binder link ready and remind learners to use the same device/browser where their work is saved.",
     ],
-    materials: ["Zoom with breakout rooms, chat, polls, and annotation", "Session 2 slides", "Triad role-play cards A–C", "Digital Binder link", "Visible timer"],
+    materials: ["Zoom with breakout rooms, chat, polls, and annotation", "Session 2 slides", "Triad role-play cards A–C", "Digital Binder, Lesson 3 activities: https://leadingwithcare.vercel.app/sections/trauma-informed-practice/binder", "Visible timer"],
     breakouts: [
       "Make the Next Few Minutes Manageable: groups of 3–4, 12 minutes.",
       "Practice the Response: triads (Leader / Participant / Observer), two rounds—a role-play card, then a learner’s own scenario.",
@@ -118,7 +118,7 @@ export const session2: Session = {
           "Repeat for each statement.",
         ],
         chat:
-          "1. “Kai is overwhelmed and shutting down.” → Kai stopped writing, became quiet, and did not respond when invited to continue.\n2. “Morgan is becoming aggressive because the feedback triggered them.” → Morgan’s voice became louder after the feedback and they began speaking over the facilitator.\n3. “Sam does not feel safe enough to participate.” → Sam has not spoken during the discussion and declined when invited to share.\n4. “Taylor is people-pleasing because they are anxious.” → Taylor agreed quickly with each suggestion and repeatedly said, “Whatever you think is best.”\n(Facilitator reference — reveal rewrites one at a time.)",
+          "Facilitator reference (reveal rewrites one at a time):\n1. “Kai is overwhelmed and shutting down.” → Kai stopped writing, became quiet, and did not respond when invited to continue.\n2. “Morgan is becoming aggressive because the feedback triggered them.” → Morgan’s voice became louder after the feedback and they began speaking over the facilitator.\n3. “Sam does not feel safe enough to participate.” → Sam has not spoken during the discussion and declined when invited to share.\n4. “Taylor is people-pleasing because they are anxious.” → Taylor agreed quickly with each suggestion and repeatedly said, “Whatever you think is best.”",
         debrief: ["Why does the wording matter?", "What could go wrong if we respond to our diagnosis instead of the behavior we can actually see?"],
         listenFor: ["Removing words like “overwhelmed,” “triggered,” “doesn’t feel safe,” “anxious”", "Concrete, observable actions and quotes"],
         watchFor: ["Rewrites that swap one label for another", "Using fight/flight/freeze/fawn terms as labels for a person"],
@@ -289,7 +289,7 @@ export const session2: Session = {
           "Record one short phrase you want available during a difficult moment.",
         ],
         chat:
-          "Examples:\n“You don’t need to explain right now. Let’s focus on what would help with the next few minutes.”\n“I want to hear the concern, and we need to keep this conversation respectful. We can pause or continue privately.”",
+          "https://leadingwithcare.vercel.app/sections/trauma-informed-practice/binder#l3-safety-support-map\nExamples:\n“You don’t need to explain right now. Let’s focus on what would help with the next few minutes.”\n“I want to hear the concern, and we need to keep this conversation respectful. We can pause or continue privately.”",
         debrief: [],
         listenFor: [],
         watchFor: ["Learners whose binder isn’t saving (red warning)—suggest a backup or note-taking alternative"],
@@ -321,6 +321,7 @@ export const session2: Session = {
       "Complete both modules (Lessons 4 and 5).",
       "Have the Bias and Unlearning Check and the Cultural Responsiveness Check available.",
       "Bring both ‘Bring to Next Class’ items: one de-identified judgment or decision with the question you’d like a peer to ask you (Lesson 4), and one prompt, norm, or activity to review (Lesson 5).",
+      "Download a binder backup: https://leadingwithcare.vercel.app/backup",
     ],
   },
   remember: "You do not need the story in order to support the next safe, manageable step.",

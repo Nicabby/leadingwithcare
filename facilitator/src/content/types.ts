@@ -85,6 +85,8 @@ export type Session = {
   afterReflection?: string[];
   /** "If learners remember only one sentence…" */
   remember?: string;
+  /** Label for the remember box (default: "If learners remember only one sentence") */
+  rememberTitle?: string;
   /** Short boxed notes shown in the overview (e.g., technology notes) */
   notes?: { title: string; text: string }[];
 };

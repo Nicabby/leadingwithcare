@@ -8,9 +8,26 @@ function accent(session: Session) {
   return session.ink === "#ffffff" ? session.color : "#24497b";
 }
 
-/** Highlights open items written as "[TBD …]". */
+/** Makes https:// links clickable. */
+function Linkify({ text }: { text: string }) {
+  const parts = text.split(/(https:\/\/[^\s)]+)/g);
+  return (
+    <>
+      {parts.map((p, i) =>
+        p.startsWith("https://") ? (
+          <a key={i} href={p} target="_blank" rel="noopener noreferrer" className="break-all text-eap underline">
+            {p.replace("https://", "")}
+          </a>
+        ) : (
+          <span key={i}>{p}</span>
+        ),
+      )}
+    </>
+  );
+}
+
+/** Highlights open items written as "[TBD …]" and links URLs. */
 export function T({ children }: { children: string }) {
-  if (!children.includes("[TBD")) return <>{children}</>;
   const parts = children.split(/(\[TBD[^\]]*\])/g);
   return (
     <>
@@ -20,7 +37,7 @@ export function T({ children }: { children: string }) {
             {p}
           </mark>
         ) : (
-          <span key={i}>{p}</span>
+          <Linkify key={i} text={p} />
         ),
       )}
     </>
@@ -116,7 +133,11 @@ function GuideCard({ item, g, session, handoutHref }: { item: RunItem; g: Activi
           {g.chat && (
             <div className="mt-3 rounded-xl border border-dashed border-slate-300 bg-white p-4">
               <div className="mb-2 flex items-center justify-between gap-2">
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-600">💬 Paste into chat / broadcast to rooms</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-600">
+                  {g.chat.startsWith("Facilitator reference")
+                    ? "📋 Facilitator reference — answers, don’t paste to learners"
+                    : "💬 Paste into chat / broadcast to rooms"}
+                </p>
                 <CopyButton text={g.chat} />
               </div>
               <p className="whitespace-pre-line font-mono text-sm text-slate-800">
@@ -159,27 +180,33 @@ function GuideCard({ item, g, session, handoutHref }: { item: RunItem; g: Activi
 
         {(g.listenFor.length > 0 || g.watchFor.length > 0) && (
         <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2">
+          {g.listenFor.length > 0 && (
           <div className="avoid-break rounded-lg bg-[#f1f2fb] p-4">
             <p className="text-xs font-bold uppercase tracking-wider text-[#3f4595]">👂 Listen for</p>
             <div className="mt-2">
               <List items={g.listenFor} color="#b1b4e5" />
             </div>
           </div>
+          )}
+          {g.watchFor.length > 0 && (
           <div className="avoid-break rounded-lg bg-[#f9f5ec] p-4">
             <p className="text-xs font-bold uppercase tracking-wider text-[#7a6534]">👀 Watch for</p>
             <div className="mt-2">
               <List items={g.watchFor} color="#cdb483" />
             </div>
           </div>
+          )}
         </div>
         )}
 
+        {g.binder.length > 0 && (
         <div className="avoid-break rounded-lg border border-lilac bg-[#fbf6fc] p-4">
           <p className="text-xs font-bold uppercase tracking-wider text-plum">📓 Digital Binder connection</p>
           <div className="mt-2">
             <List items={g.binder} color="#7f4f74" />
           </div>
         </div>
+        )}
 
         {g.handouts && g.handouts.length > 0 && (
           <p className="text-sm text-slate-600">
@@ -370,7 +397,7 @@ export default function SessionView({ session, print = false }: { session: Sessi
       {session.remember && (
         <div className="avoid-break mt-6 rounded-xl border-2 p-5 text-center" style={{ borderColor: session.color, backgroundColor: session.tint }}>
           <p className="text-xs font-bold uppercase tracking-wider" style={{ color }}>
-            If learners remember only one sentence
+            {session.rememberTitle ?? "If learners remember only one sentence"}
           </p>
           <p className="mt-2 text-lg font-semibold text-slate-900">
             <T>{session.remember}</T>

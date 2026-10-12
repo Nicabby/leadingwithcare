@@ -69,7 +69,8 @@ export const session1: Session = {
     materials: [
       "Zoom with breakout rooms, chat, polls, and annotation",
       "TalentLMS course link",
-      "Digital Binder link",
+      "Digital Binder: https://leadingwithcare.vercel.app",
+      "Digital Binder, Lesson 2 activities: https://leadingwithcare.vercel.app/sections/mindset-emotional-safety/binder",
       "Session 1 slides",
       "Visible timer",
     ],
@@ -327,6 +328,7 @@ export const session1: Session = {
       "Bring your Safety and Support Response Map.",
       "Bring one short phrase you drafted for use during a difficult moment.",
       "Bring one de-identified scenario and the short response you drafted (Lesson 3 ‘Bring to Next Class’). Do not include identifying, confidential, or private information.",
+      "Download a binder backup: https://leadingwithcare.vercel.app/backup",
     ],
   },
   afterReflection: [
