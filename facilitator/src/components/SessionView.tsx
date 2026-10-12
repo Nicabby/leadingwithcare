@@ -151,10 +151,13 @@ function GuideCard({ item, g, session, handoutHref }: { item: RunItem; g: Activi
           </div>
         )}
 
-        <Part label="Debrief questions" icon="❓" color={color}>
-          <List items={g.debrief} color={session.color} />
-        </Part>
+        {g.debrief.length > 0 && (
+          <Part label="Debrief questions" icon="❓" color={color}>
+            <List items={g.debrief} color={session.color} />
+          </Part>
+        )}
 
+        {(g.listenFor.length > 0 || g.watchFor.length > 0) && (
         <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2">
           <div className="avoid-break rounded-lg bg-[#f1f2fb] p-4">
             <p className="text-xs font-bold uppercase tracking-wider text-[#3f4595]">👂 Listen for</p>
@@ -169,6 +172,7 @@ function GuideCard({ item, g, session, handoutHref }: { item: RunItem; g: Activi
             </div>
           </div>
         </div>
+        )}
 
         <div className="avoid-break rounded-lg border border-lilac bg-[#fbf6fc] p-4">
           <p className="text-xs font-bold uppercase tracking-wider text-plum">📓 Digital Binder connection</p>
@@ -249,6 +253,11 @@ export default function SessionView({ session, print = false }: { session: Sessi
       <Callout title="Session purpose" color={session.color} tint={session.tint}>
         <T>{o.purpose}</T>
       </Callout>
+      {session.notes?.map((n) => (
+        <Callout key={n.title} title={n.title} color="#cdb483" tint="#f9f5ec">
+          <T>{n.text}</T>
+        </Callout>
+      ))}
       <h3 className="mb-2 font-semibold text-slate-900">Learning objectives</h3>
       <p className="mb-3 text-slate-600">By the end of this session, participants will be able to:</p>
       <List items={o.objectives} color={color} numbered />
@@ -357,6 +366,26 @@ export default function SessionView({ session, print = false }: { session: Sessi
           <List items={session.close.next} color={session.color} />
         </Box>
       </div>
+
+      {session.remember && (
+        <div className="avoid-break mt-6 rounded-xl border-2 p-5 text-center" style={{ borderColor: session.color, backgroundColor: session.tint }}>
+          <p className="text-xs font-bold uppercase tracking-wider" style={{ color }}>
+            If learners remember only one sentence
+          </p>
+          <p className="mt-2 text-lg font-semibold text-slate-900">
+            <T>{session.remember}</T>
+          </p>
+        </div>
+      )}
+
+      {session.afterReflection && (
+        <>
+          <H2>Facilitator Reflection After the Session</H2>
+          <div className="avoid-break rounded-xl p-4 sm:p-5" style={{ backgroundColor: session.tint }}>
+            <Checklist items={session.afterReflection} />
+          </div>
+        </>
+      )}
 
       {!print && (
         <p className="mt-8 text-sm text-slate-500">

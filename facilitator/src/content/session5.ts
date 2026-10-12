@@ -179,7 +179,7 @@ export const session5: Session = {
     reflection: ["When someone’s account differs from mine, I will begin by ___.", "I used to see ___ as ___; now I pay attention to ___."],
     carryForward: ["Start your 30-day commitment this week.", "Use one reflective statement and one genuine question in your next difficult conversation."],
     next: [
-      "Complete Lesson 9: Final Knowledge Check in the LMS. [TBD: confirm whether it is completed before or during Session 6]",
+      "Complete Lesson 9: Final Knowledge Check in TalentLMS. [TBD: confirm whether it is completed before or during Session 6]",
       "Finish Lesson 8 binder activities, including Looking at My Practice Differently.",
       "Bring: ‘What are you taking with you?’ (Lesson 8 ‘Bring to Next Class’).",
       "[TBD: date/time of Session 6]",

@@ -81,6 +81,12 @@ export type Session = {
     carryForward: string[];
     next: string[];
   };
+  /** Facilitator self-reflection after the session */
+  afterReflection?: string[];
+  /** "If learners remember only one sentence…" */
+  remember?: string;
+  /** Short boxed notes shown in the overview (e.g., technology notes) */
+  notes?: { title: string; text: string }[];
 };
 
 export type HandoutBlock =

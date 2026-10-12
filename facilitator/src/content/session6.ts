@@ -30,7 +30,7 @@ export const session6: Session = {
   },
   before: {
     prework: [
-      "Complete Lesson 9: Final Knowledge Check in the LMS. [TBD: before the session, or live during it?]",
+      "Complete Lesson 9: Final Knowledge Check in TalentLMS. [TBD: before the session, or live during it?]",
       "Finish all Lesson 8 binder activities.",
     ],
     bring: [
@@ -38,7 +38,7 @@ export const session6: Session = {
       "Their draft 30-Day Practice Commitment.",
     ],
     prep: [
-      "Review the answer key and identify 3–4 knowledge-check items to discuss (use LMS results if available). [TBD: LMS reporting]",
+      "Review the answer key and identify 3–4 knowledge-check items to discuss (use TalentLMS reports if available).",
       "Finalize the post-course survey and its link. [TBD: survey tool and link]",
       "Prepare completion/certificate information. [TBD]",
       "Plan multiple ways for participants to share in the closing circle (voice, chat, image, word).",
@@ -65,7 +65,7 @@ export const session6: Session = {
       purpose: "Consolidate understanding by discussing the reasoning behind the strongest responses.",
       method: "Polls on 3–4 final knowledge-check scenarios; discuss why each option is or isn’t strongest.",
       modes: ["Poll", "Main room"],
-      notes: "Focus on reasoning, not scores. [TBD: whether the final check is completed live or reviewed after LMS completion]",
+      notes: "Focus on reasoning, not scores. [TBD: whether the final check is completed live or reviewed after TalentLMS completion]",
       guide: {
         purpose: "Make the reasoning visible: connect each strong response to the course principles and tools.",
         setup: ["Choose 3–4 items from the Final Knowledge Check (Answer Key), ideally those participants found hardest.", "Load them as polls."],

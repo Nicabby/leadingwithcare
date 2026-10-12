@@ -50,7 +50,7 @@ export default function AnswerKey({ print = false }: { print?: boolean }) {
       <p className="text-slate-600">
         Answers and rationales for the lesson knowledge checks and the Final Knowledge Check, matching the practice versions in the learner
         binder. Use this key to prepare, to address common misconceptions in live sessions, and to support learners who are stuck—not to share
-        answers directly. [TBD: confirm passing score and attempts in the LMS]
+        answers directly. [TBD: confirm passing score and attempts in TalentLMS]
       </p>
       {!print && (
         <nav aria-label="Answer key contents" className="mt-4 flex flex-wrap gap-2">
