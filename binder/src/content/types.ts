@@ -111,6 +111,9 @@ export type Question =
       explanation: string;
     };
 
+/** An unscored question: no answer key is stored in the binder. */
+export type SelfCheckQuestion = { id: string; prompt: string; options: string[] };
+
 export type Lesson = {
   slug: string;
   title: string;
@@ -135,6 +138,8 @@ export type Lesson = {
   /** practice only */
   scenarioIntro?: string;
   questions?: Question[];
+  /** unscored self-check (no answers stored); shown in random order */
+  selfCheck?: SelfCheckQuestion[];
 };
 
 export type Section = {

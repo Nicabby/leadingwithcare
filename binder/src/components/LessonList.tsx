@@ -14,7 +14,9 @@ export default function LessonList({ section }: { section: Section }) {
         const result = practice[key];
         const meta =
           lesson.kind === "practice"
-            ? `Practice · ${lesson.questions?.length ?? 0} questions${result ? ` · Last score ${result.score}/${result.total}` : ""}`
+            ? lesson.selfCheck
+              ? `Unscored practice · ${lesson.selfCheck.length} questions in random order`
+              : `Practice · ${lesson.questions?.length ?? 0} questions${result ? ` · Last score ${result.score}/${result.total}` : ""}`
             : lesson.worksheets?.length
               ? lesson.worksheets.map((w) => w.title).join(" · ")
               : "";

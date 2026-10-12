@@ -10,6 +10,7 @@ import SaveReminder from "@/components/SaveReminder";
 import NotesBox from "@/components/lesson/NotesBox";
 import CompleteToggle from "@/components/lesson/CompleteToggle";
 import Practice from "@/components/lesson/Practice";
+import SelfCheck from "@/components/lesson/SelfCheck";
 
 export function generateStaticParams() {
   return allLessons.map(({ section, lesson }) => ({ sectionId: section.id, lessonSlug: lesson.slug }));
@@ -129,6 +130,13 @@ export default async function LessonPage({ params }: Props) {
       </div>
 
       {lesson.quote && <Quote color={color}>{lesson.quote}</Quote>}
+
+      {lesson.kind === "practice" && lesson.selfCheck && (
+        <>
+          <Divider />
+          <SelfCheck questions={lesson.selfCheck} storageKey={key} />
+        </>
+      )}
 
       {lesson.kind === "practice" && lesson.questions && (
         <>

@@ -13,7 +13,7 @@ Standalone Next.js site for facilitators of the Leading with Care live virtual s
 ## Editing content
 Sessions are currently an **outline**: structure and draft content drawn from the course, with open items written as `[TBD …]` (highlighted in the guide). Session content lives in `src/content/session1.ts` … `session6.ts`; handouts in `src/content/handouts.ts`. Change a session's `status` to `"Draft"` or `"Final"` as it is completed.
 
-`src/content/course/` is a copy of the binder's `src/content` course files (used for the answer key) — copy them across again whenever the binder content changes.
+`src/content/course/` is a copy of the binder's `src/content` course files (used for the answer key). When the binder content changes, copy the lesson files across again — **except `lesson9-final-check.ts`**: the binder's version deliberately has no answers (learners see it unscored, in random order), so the facilitator copy is the only place the Final Knowledge Check answer key lives.
 
 ## Regenerating the PDF
 After editing content:
